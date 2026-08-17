@@ -14,11 +14,11 @@ const MENU_ITEMS = [
 const MARQUEE_TEXT = 'DFENCE'
 
 const LogoPill = () => (
-  <div className="lg:h-16 h-9 px-4 lg:px-8 rounded-full bg-black flex items-center justify-center shrink-0 mx-3 lg:mx-6 shadow-sm">
+  <div className="lg:h-14 h-8 px-3 lg:px-6 rounded-full bg-black flex items-center justify-center shrink-0 mx-3 lg:mx-5 shadow-sm">
     <img
       src="/assets/logo/logo.svg"
       alt="Dfence Logo"
-      className="h-4 sm:h-5 lg:h-8 w-auto object-contain"
+      className="h-3.5 sm:h-4 lg:h-7 w-auto object-contain"
     />
   </div>
 )
@@ -26,15 +26,15 @@ const LogoPill = () => (
 const MarqueeRow = () => (
   <div className="moveX flex items-center shrink-0">
     <h2
-      className="whitespace-nowrap text-4xl sm:text-5xl lg:text-[7vw] leading-none uppercase px-4 lg:px-6 text-black"
-      style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6 text-black"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
     >
       {MARQUEE_TEXT}
     </h2>
     <LogoPill />
     <h2
-      className="whitespace-nowrap text-4xl sm:text-5xl lg:text-[7vw] leading-none uppercase px-4 lg:px-6 text-black"
-      style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6 text-black"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
     >
       {MARQUEE_TEXT}
     </h2>
@@ -194,7 +194,7 @@ export default function FullScreenNav() {
   }
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}>
       <div
         id="fullscreennav"
         className="fullscreennav fixed inset-0 z-[60] overflow-hidden text-white w-full h-screen"
@@ -265,15 +265,15 @@ export default function FullScreenNav() {
                   }`}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Default static label */}
+                  {/* Default static label with DM Sans */}
                   <h1
-                    className="text-4xl sm:text-5xl lg:text-[7vw] text-center uppercase leading-none py-3 sm:py-4 lg:py-5 text-white transition-colors duration-300"
-                    style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.5vw] font-bold text-center uppercase tracking-tight leading-none py-3.5 sm:py-4.5 lg:py-5.5 text-white transition-colors duration-300"
+                    style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
                   >
                     {item.label}
                   </h1>
 
-                  {/* Marquee band on hover with LogoPills */}
+                  {/* Marquee band on hover with LogoPills and DM Sans */}
                   <div className="moveLink absolute inset-0 bg-[#108730] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <MarqueeRow />
                     <MarqueeRow />
@@ -283,8 +283,11 @@ export default function FullScreenNav() {
             })}
           </div>
 
-          {/* Bottom metadata / footer (K72 style) */}
-          <div className="navmeta flex justify-between items-center px-6 py-4 text-xs font-mono tracking-widest text-white/40 uppercase">
+          {/* Bottom metadata / footer (K72 style with DM Sans) */}
+          <div
+            className="navmeta flex justify-between items-center px-6 py-4 text-xs font-medium tracking-widest text-white/40 uppercase"
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+          >
             <span>DFENCE CONTROLLER</span>
             <span>2026</span>
           </div>
