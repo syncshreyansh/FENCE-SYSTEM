@@ -46,28 +46,18 @@ h1, h2 {
 }
 
 /* ── FullScreenNav marquee ── */
-.fs-nav .moveX {
-  animation-name: fsMoveAnimation;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+.fs-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: fsMarqueeScroll 9s linear infinite;
 }
 
-.fs-nav .moveLink {
-  opacity: 0;
-  transition: opacity ease 0.3s;
-}
-
-.fs-nav .link:hover .moveLink,
-.fs-nav .link:focus-within .moveLink {
-  opacity: 1;
-}
-
-@keyframes fsMoveAnimation {
+@keyframes fsMarqueeScroll {
   from {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
