@@ -44,3 +44,30 @@ h1, h2 {
   font-weight: 500;
   color: #f3f4f6;
 }
+
+/* ── FullScreenNav marquee ── */
+.fs-nav .moveX {
+  animation-name: fsMoveAnimation;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.fs-nav .moveLink {
+  opacity: 0;
+  transition: opacity ease 0.3s;
+}
+
+.fs-nav .link:hover .moveLink,
+.fs-nav .link:focus-within .moveLink {
+  opacity: 1;
+}
+
+@keyframes fsMoveAnimation {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

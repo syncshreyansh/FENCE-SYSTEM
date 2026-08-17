@@ -1,88 +1,50 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
-import SpecularButton from '../common/SpecularButton';
-
-const NAV_ITEMS = [
-  { label: 'Home', sectionId: 'home' },
-  { label: 'Problem', sectionId: 'problem' },
-  { label: 'Solution', sectionId: 'solution' },
-];
+import { useContext, useRef } from 'react'
+import { NavbarContext } from '../../context/NavbarContext'
 
 export default function Navbar() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('Home');
-  const [scrolled, setScrolled] = useState(false);
-
-  // Track scroll position for backdrop-blur effect
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const handleNavClick = (item) => {
-    setActiveTab(item.label);
-    const section = document.getElementById(item.sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const fillRef = useRef(null)
+  const [, setNavOpen] = useContext(NavbarContext)
 
   return (
-    <nav
-      className={`
-        fixed top-0 left-0 right-0 z-50
-        flex items-center justify-between
-        px-8 py-4
-        transition-all duration-300
-        ${scrolled
-          ? 'bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.06]'
-          : 'bg-transparent border-b border-transparent'
-        }
-      `}
-    >
-      {/* Left — Segmented tab group */}
-      <div className="flex items-center bg-white/[0.06] rounded-full p-1 gap-0.5">
-        {NAV_ITEMS.map((item) => {
-          const isActive = activeTab === item.label;
-          return (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => handleNavClick(item)}
-              className={`
-                relative px-5 py-2 rounded-full text-sm font-medium
-                transition-colors duration-200 cursor-pointer
-                ${isActive
-                  ? 'text-[#0a0a0b]'
-                  : 'text-neutral-400 hover:text-neutral-200'
-                }
-              `}
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="activeNavPill"
-                  className="absolute inset-0 bg-white rounded-full shadow-sm"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">{item.label}</span>
-            </button>
-          );
-        })}
+    <div className="fixed top-0 w-full flex items-start justify-between z-50">
+      <div className="p-4 lg:p-5">
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault()
+            setNavOpen(false)
+            const section = document.getElementById('home')
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }}
+          className="inline-block text-white uppercase tracking-widest text-2xl lg:text-3xl leading-none"
+          style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+        >
+          Smart&nbsp;Con
+        </a>
       </div>
-
-      {/* Right — Dashboard CTA */}
-      <SpecularButton
-        size="sm"
-        radius={999}
-        baseColor="#525252"
-        lineColor="#ffffff"
-        onClick={() => navigate('/dashboard')}
+      <button
+        type="button"
+        onClick={() => {
+          setNavOpen(true)
+        }}
+        aria-label="Open menu"
+        className="group relative h-10 lg:h-16 w-24 lg:w-48 bg-[#161616] border border-white/10 overflow-hidden cursor-pointer"
+        onMouseEnter={() => {
+          if (fillRef.current) fillRef.current.style.height = '100%'
+        }}
+        onMouseLeave={() => {
+          if (fillRef.current) fillRef.current.style.height = '0%'
+        }}
       >
-        Go to Dashboard &nbsp;→
-      </SpecularButton>
-    </nav>
-  );
+        <div
+          ref={fillRef}
+          className="bg-[#B6E232] transition-all duration-300 absolute top-0 h-0 w-full"
+        />
+        <div className="relative h-full px-6 lg:px-10 flex flex-col justify-center items-end gap-1 lg:gap-1.5">
+          <div className="w-10 lg:w-16 h-0.5 bg-white transition-transform duration-300 group-hover:scale-x-110 origin-right" />
+          <div className="w-6 lg:w-9 h-0.5 bg-white transition-transform duration-300 group-hover:scale-x-110 origin-right" />
+        </div>
+      </button>
+    </div>
+  )
 }
