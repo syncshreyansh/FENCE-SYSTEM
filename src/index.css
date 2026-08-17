@@ -3,6 +3,7 @@
 
 @theme {
   --font-display: 'Playfair Display', Georgia, serif;
+  --font-bebas: 'Bebas Neue', sans-serif;
 }
 
 html {
@@ -46,18 +47,16 @@ h1, h2 {
 }
 
 /* ── FullScreenNav marquee ── */
-.fs-marquee-track {
-  display: flex;
-  width: max-content;
+.moveX {
+  animation: moveXAnimation 12s linear infinite;
   will-change: transform;
-  animation: fsMarqueeScroll 9s linear infinite;
 }
 
-@keyframes fsMarqueeScroll {
+@keyframes moveXAnimation {
   from {
     transform: translateX(0%);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
