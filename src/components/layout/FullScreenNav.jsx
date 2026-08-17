@@ -14,8 +14,8 @@ const MENU_ITEMS = [
 const MarqueeRow = ({ text }) => (
   <div className="moveX flex items-center shrink-0">
     <h2
-      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6"
-      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: '#000000' }}
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-black tracking-tight leading-none uppercase px-4 lg:px-6"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900, color: '#000000' }}
     >
       {text}
     </h2>
@@ -26,8 +26,8 @@ const MarqueeRow = ({ text }) => (
       style={{ filter: 'brightness(0)' }}
     />
     <h2
-      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6"
-      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: '#000000' }}
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-black tracking-tight leading-none uppercase px-4 lg:px-6"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900, color: '#000000' }}
     >
       {text}
     </h2>
@@ -71,29 +71,30 @@ export default function FullScreenNav() {
 
         const tl = gsap.timeline()
 
-        // 1. Show overlay container
+        // 1. Show transparent overlay container so stair columns wipe down over the underlying page
         tl.set(overlay, { display: 'block' })
-        tl.set(stairs, { transformOrigin: 'top center' })
+        tl.set(stairs, { transformOrigin: 'top center', scaleY: 0 })
 
-        // 2. Stairs wipe down from top with stagger
+        // 2. Stairs wipe down from top in cascading stagger (from right to left)
         tl.to(stairs, {
           scaleY: 1,
-          duration: 0.6,
+          duration: 0.65,
           stagger: {
-            amount: -0.2,
+            amount: 0.25,
+            from: 'end',
           },
           ease: 'power4.inOut',
         })
 
-        // 3. Header & footer fade in as stairs are wiping
+        // 3. Header & footer fade in
         tl.to(
           navMeta,
           {
             opacity: 1,
-            duration: 0.4,
+            duration: 0.35,
             ease: 'power2.out',
           },
-          0.25
+          0.35
         )
 
         // 4. Links 3D rotate reveal with staggered sequence
@@ -106,7 +107,7 @@ export default function FullScreenNav() {
             stagger: 0.08,
             ease: 'power3.out',
           },
-          0.25
+          0.35
         )
       } else {
         gsap.killTweensOf([stairs, links, navMeta, overlay])
@@ -122,7 +123,7 @@ export default function FullScreenNav() {
           opacity: 0,
           rotateX: 90,
           duration: 0.25,
-          stagger: 0.05,
+          stagger: 0.04,
           ease: 'power2.in',
         })
 
@@ -137,16 +138,16 @@ export default function FullScreenNav() {
           0
         )
 
-        // 3. Stairs wipe down from bottom to exit
+        // 3. Stairs wipe down towards bottom to exit and reveal page underneath (reverse stagger: from left to right)
         tl.set(stairs, { transformOrigin: 'bottom center' })
         tl.to(
           stairs,
           {
             scaleY: 0,
-            duration: 0.5,
+            duration: 0.6,
             stagger: {
-              amount: 0.15,
-              from: 'end',
+              amount: 0.25,
+              from: 'start',
             },
             ease: 'power4.inOut',
           },
@@ -195,10 +196,10 @@ export default function FullScreenNav() {
     <div ref={containerRef} style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}>
       <div
         id="fullscreennav"
-        className="fullscreennav fixed inset-0 z-[60] overflow-hidden text-white w-full h-screen bg-[#000000]"
+        className="fullscreennav fixed inset-0 z-[60] overflow-hidden text-white w-full h-screen"
         style={{ display: 'none' }}
       >
-        {/* Stair columns background in pure black #000000 */}
+        {/* Stair columns background - individual columns drop and retract over the page */}
         <div className="absolute inset-0 flex w-full h-full pointer-events-none">
           <div className="stairing w-1/5 h-full bg-[#000000]" />
           <div className="stairing w-1/5 h-full bg-[#000000]" />
@@ -263,10 +264,10 @@ export default function FullScreenNav() {
                   }`}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Default static label with DM Sans */}
+                  {/* Default static label with DM Sans 900 font weight */}
                   <h1
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.5vw] font-bold text-center uppercase tracking-tight leading-none py-3.5 sm:py-4.5 lg:py-5.5 text-white transition-colors duration-300"
-                    style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.5vw] font-black text-center uppercase tracking-tight leading-none py-3.5 sm:py-4.5 lg:py-5.5 text-white transition-colors duration-300"
+                    style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900 }}
                   >
                     {item.label}
                   </h1>
@@ -283,7 +284,7 @@ export default function FullScreenNav() {
 
           {/* Bottom metadata / footer (K72 style with DM Sans) */}
           <div
-            className="navmeta flex justify-between items-center px-6 py-4 text-xs font-medium tracking-widest text-white/40 uppercase"
+            className="navmeta flex justify-between items-center px-6 py-4 text-xs font-semibold tracking-widest text-white/40 uppercase"
             style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
           >
             <span>DFENCE CONTROLLER</span>
