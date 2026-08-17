@@ -5,40 +5,38 @@ import { useNavigate } from 'react-router-dom'
 import { NavbarContext } from '../../context/NavbarContext'
 
 const MENU_ITEMS = [
-  { label: 'Home', type: 'section', target: 'home' },
-  { label: 'Problem', type: 'section', target: 'problem' },
-  { label: 'Solution', type: 'section', target: 'solution' },
-  { label: 'Dashboard', type: 'route', target: '/dashboard' },
+  { label: 'Home', hoverText: 'KNOW ABOUT US', type: 'section', target: 'home' },
+  { label: 'Problem', hoverText: 'THE EXACT PROBLEM', type: 'section', target: 'problem' },
+  { label: 'Solution', hoverText: "WHAT WE'VE BUILT", type: 'section', target: 'solution' },
+  { label: 'Dashboard', hoverText: 'KNOW THE STATS', type: 'route', target: '/dashboard' },
 ]
 
-const MARQUEE_TEXT = 'DFENCE'
-
-const LogoPill = () => (
-  <div className="lg:h-14 h-8 px-3 lg:px-6 rounded-full bg-black flex items-center justify-center shrink-0 mx-3 lg:mx-5 shadow-sm">
+const MarqueeRow = ({ text }) => (
+  <div className="moveX flex items-center shrink-0">
+    <h2
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: '#000000' }}
+    >
+      {text}
+    </h2>
     <img
       src="/assets/logo/logo.svg"
       alt="Dfence Logo"
-      className="h-3.5 sm:h-4 lg:h-7 w-auto object-contain"
+      className="h-6 sm:h-8 lg:h-12 w-auto object-contain mx-3 lg:mx-6 shrink-0"
+      style={{ filter: 'brightness(0)' }}
     />
-  </div>
-)
-
-const MarqueeRow = () => (
-  <div className="moveX flex items-center shrink-0">
     <h2
-      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6 text-black"
-      style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6"
+      style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: '#000000' }}
     >
-      {MARQUEE_TEXT}
+      {text}
     </h2>
-    <LogoPill />
-    <h2
-      className="whitespace-nowrap text-3xl sm:text-4xl lg:text-[5vw] font-bold tracking-tight leading-none uppercase px-4 lg:px-6 text-black"
-      style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
-    >
-      {MARQUEE_TEXT}
-    </h2>
-    <LogoPill />
+    <img
+      src="/assets/logo/logo.svg"
+      alt="Dfence Logo"
+      className="h-6 sm:h-8 lg:h-12 w-auto object-contain mx-3 lg:mx-6 shrink-0"
+      style={{ filter: 'brightness(0)' }}
+    />
   </div>
 )
 
@@ -197,16 +195,16 @@ export default function FullScreenNav() {
     <div ref={containerRef} style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}>
       <div
         id="fullscreennav"
-        className="fullscreennav fixed inset-0 z-[60] overflow-hidden text-white w-full h-screen"
+        className="fullscreennav fixed inset-0 z-[60] overflow-hidden text-white w-full h-screen bg-[#000000]"
         style={{ display: 'none' }}
       >
-        {/* Stair columns background */}
+        {/* Stair columns background in pure black #000000 */}
         <div className="absolute inset-0 flex w-full h-full pointer-events-none">
-          <div className="stairing w-1/5 h-full bg-[#0a0a0b]" />
-          <div className="stairing w-1/5 h-full bg-[#0a0a0b]" />
-          <div className="stairing w-1/5 h-full bg-[#0a0a0b]" />
-          <div className="stairing w-1/5 h-full bg-[#0a0a0b]" />
-          <div className="stairing w-1/5 h-full bg-[#0a0a0b]" />
+          <div className="stairing w-1/5 h-full bg-[#000000]" />
+          <div className="stairing w-1/5 h-full bg-[#000000]" />
+          <div className="stairing w-1/5 h-full bg-[#000000]" />
+          <div className="stairing w-1/5 h-full bg-[#000000]" />
+          <div className="stairing w-1/5 h-full bg-[#000000]" />
         </div>
 
         <div className="relative z-10 h-full flex flex-col justify-between">
@@ -273,10 +271,10 @@ export default function FullScreenNav() {
                     {item.label}
                   </h1>
 
-                  {/* Marquee band on hover with LogoPills and DM Sans */}
+                  {/* Marquee band on hover with custom item hoverText, black text, and backgroundless logo */}
                   <div className="moveLink absolute inset-0 bg-[#108730] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                    <MarqueeRow />
-                    <MarqueeRow />
+                    <MarqueeRow text={item.hoverText} />
+                    <MarqueeRow text={item.hoverText} />
                   </div>
                 </div>
               )
