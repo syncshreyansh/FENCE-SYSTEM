@@ -11,7 +11,7 @@ const MENU_ITEMS = [
   { label: 'Dashboard', type: 'route', target: '/dashboard' },
 ]
 
-const MARQUEE_TEXT = 'SMART CON'
+const MARQUEE_TEXT = 'DFENCE'
 const MARQUEE_IMAGES = ['/assets/hero-images/img1.png', '/assets/hero-images/img2.png']
 
 const MarqueeRow = () => (
@@ -220,19 +220,23 @@ export default function FullScreenNav() {
                   if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }, 650)
               }}
-              className="text-white uppercase tracking-widest text-2xl lg:text-3xl leading-none cursor-pointer"
-              style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+              className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
+              aria-label="Home"
             >
-              Smart&nbsp;Con
+              <img
+                src="/assets/logo/logo.svg"
+                alt="Dfence Logo"
+                className="h-7 sm:h-8 lg:h-9 w-auto object-contain"
+              />
             </button>
             <button
               type="button"
               onClick={() => setNavOpen(false)}
               aria-label="Close menu"
-              className="group relative w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
+              className="group relative w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
             >
-              <div className="absolute w-7 lg:w-10 h-0.5 lg:h-1 bg-[#B6E232] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
-              <div className="absolute w-7 lg:w-10 h-0.5 lg:h-1 bg-[#B6E232] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#B6E232] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#B6E232] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
             </button>
           </div>
 
@@ -280,7 +284,7 @@ export default function FullScreenNav() {
 
           {/* Bottom metadata / footer (K72 style) */}
           <div className="navmeta flex justify-between items-center px-6 py-4 text-xs font-mono tracking-widest text-white/40 uppercase">
-            <span>SMART CONTROLLER</span>
+            <span>DFENCE CONTROLLER</span>
             <span>2026</span>
           </div>
         </div>
