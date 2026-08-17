@@ -12,7 +12,16 @@ const MENU_ITEMS = [
 ]
 
 const MARQUEE_TEXT = 'DFENCE'
-const MARQUEE_IMAGES = ['/assets/hero-images/img1.png', '/assets/hero-images/img2.png']
+
+const LogoPill = () => (
+  <div className="lg:h-16 h-9 px-4 lg:px-8 rounded-full bg-black flex items-center justify-center shrink-0 mx-3 lg:mx-6 shadow-sm">
+    <img
+      src="/assets/logo/logo.svg"
+      alt="Dfence Logo"
+      className="h-4 sm:h-5 lg:h-8 w-auto object-contain"
+    />
+  </div>
+)
 
 const MarqueeRow = () => (
   <div className="moveX flex items-center shrink-0">
@@ -22,22 +31,14 @@ const MarqueeRow = () => (
     >
       {MARQUEE_TEXT}
     </h2>
-    <img
-      className="lg:h-20 h-10 rounded-full shrink-0 lg:w-64 w-24 object-cover mx-3 lg:mx-4"
-      src={MARQUEE_IMAGES[0]}
-      alt=""
-    />
+    <LogoPill />
     <h2
       className="whitespace-nowrap text-4xl sm:text-5xl lg:text-[7vw] leading-none uppercase px-4 lg:px-6 text-black"
       style={{ fontFamily: '"Bebas Neue", sans-serif' }}
     >
       {MARQUEE_TEXT}
     </h2>
-    <img
-      className="lg:h-20 h-10 rounded-full shrink-0 lg:w-64 w-24 object-cover mx-3 lg:mx-4"
-      src={MARQUEE_IMAGES[1]}
-      alt=""
-    />
+    <LogoPill />
   </div>
 )
 
@@ -235,8 +236,8 @@ export default function FullScreenNav() {
               aria-label="Close menu"
               className="group relative w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
             >
-              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#B6E232] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
-              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#B6E232] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#108730] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#108730] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
             </button>
           </div>
 
@@ -272,8 +273,8 @@ export default function FullScreenNav() {
                     {item.label}
                   </h1>
 
-                  {/* Marquee band on hover */}
-                  <div className="moveLink absolute inset-0 bg-[#B6E232] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  {/* Marquee band on hover with LogoPills */}
+                  <div className="moveLink absolute inset-0 bg-[#108730] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <MarqueeRow />
                     <MarqueeRow />
                   </div>
