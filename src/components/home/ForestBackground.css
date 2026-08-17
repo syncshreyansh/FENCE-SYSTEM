@@ -1,0 +1,266 @@
+/* ─── Forest image background ─── */
+
+.forest-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+
+  /* Static forest image, treeline anchored to bottom */
+  background-color: #060a06;
+  background-image: url('/assets/forest/forest.png');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+/* ── Top darkening overlay (heading legibility) ── */
+
+.forest-bg__top-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.12) 30%,
+    transparent 50%
+  );
+}
+
+/* ── Mist drift overlay ── */
+
+.forest-bg__mist {
+  position: absolute;
+  top: 32%;
+  left: -30%;
+  width: 160%;
+  height: 22%;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0.12;
+  background: radial-gradient(
+    ellipse 80% 100% at center,
+    rgba(45, 82, 52, 0.4) 0%,
+    rgba(45, 82, 52, 0.15) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: mistDrift 58s linear infinite alternate;
+}
+
+@keyframes mistDrift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(25%); }
+}
+
+/* ── Bottom fade to match next section (#0a0a0b) ── */
+
+.forest-bg__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(10, 10, 11, 0.15) 20%,
+    rgba(10, 10, 11, 0.4) 40%,
+    rgba(10, 10, 11, 0.7) 60%,
+    rgba(10, 10, 11, 0.9) 80%,
+    #0a0a0b 100%
+  );
+  z-index: 1;
+}
+
+/* ── Treeline sway (duplicate image strips) ── */
+
+.forest-bg__sway {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: center bottom;
+
+  /* Show same forest image, pixel-aligned with the static background */
+  background-image: url('/assets/forest/forest.png');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  /* Clip to only the treeline area (bottom 55%) — hides the sky portion
+     so the sway effect only applies to the tree silhouettes */
+  clip-path: inset(45% 0 0 0);
+}
+
+.forest-bg__sway--a {
+  animation: canopySway1 8s ease-in-out infinite;
+}
+
+.forest-bg__sway--b {
+  clip-path: inset(50% 0 0 0);
+  animation: canopySway2 10s ease-in-out 2s infinite;
+}
+
+.forest-bg__sway--c {
+  clip-path: inset(58% 0 0 0);
+  animation: canopySway3 7s ease-in-out 4.5s infinite;
+}
+
+@keyframes canopySway1 {
+  0%, 100% { transform: skewX(0deg); opacity: 0.97; }
+  50%      { transform: skewX(0.6deg); opacity: 1; }
+}
+
+@keyframes canopySway2 {
+  0%, 100% { transform: skewX(0deg); opacity: 0.95; }
+  50%      { transform: skewX(-0.9deg); opacity: 1; }
+}
+
+@keyframes canopySway3 {
+  0%, 100% { transform: skewX(0deg); opacity: 0.96; }
+  50%      { transform: skewX(0.7deg); opacity: 1; }
+}
+
+/* ── Firefly particles ── */
+
+.forest-bg__firefly {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: #3d6b45;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  box-shadow: 0 0 5px 1.5px rgba(61, 107, 69, 0.35);
+  z-index: 2;
+}
+
+.forest-bg__firefly--1 {
+  top: 36%;
+  left: 14%;
+  animation: ff1 20s ease-in-out infinite;
+}
+
+.forest-bg__firefly--2 {
+  top: 42%;
+  left: 38%;
+  animation: ff2 18s ease-in-out 3s infinite;
+}
+
+.forest-bg__firefly--3 {
+  top: 48%;
+  left: 62%;
+  animation: ff3 22s ease-in-out 7s infinite;
+}
+
+.forest-bg__firefly--4 {
+  top: 40%;
+  left: 82%;
+  animation: ff4 19s ease-in-out 11s infinite;
+}
+
+.forest-bg__firefly--5 {
+  top: 52%;
+  left: 26%;
+  animation: ff5 24s ease-in-out 5s infinite;
+}
+
+.forest-bg__firefly--6 {
+  top: 55%;
+  left: 50%;
+  animation: ff6 21s ease-in-out 14s infinite;
+}
+
+.forest-bg__firefly--7 {
+  top: 45%;
+  left: 72%;
+  animation: ff7 17s ease-in-out 9s infinite;
+}
+
+.forest-bg__firefly--8 {
+  top: 58%;
+  left: 88%;
+  animation: ff8 23s ease-in-out 2s infinite;
+}
+
+@keyframes ff1 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  8%       { opacity: 0.2; }
+  45%      { transform: translate(10px, -30px); opacity: 0.18; }
+  78%      { transform: translate(-4px, -50px); opacity: 0.12; }
+  94%      { opacity: 0; }
+}
+
+@keyframes ff2 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  12%      { opacity: 0.16; }
+  40%      { transform: translate(-8px, -24px); opacity: 0.22; }
+  70%      { transform: translate(-14px, -44px); opacity: 0.14; }
+  93%      { opacity: 0; }
+}
+
+@keyframes ff3 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  10%      { opacity: 0.18; }
+  50%      { transform: translate(12px, -28px); opacity: 0.2; }
+  82%      { transform: translate(4px, -48px); opacity: 0.1; }
+  95%      { opacity: 0; }
+}
+
+@keyframes ff4 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  15%      { opacity: 0.15; }
+  42%      { transform: translate(-6px, -20px); opacity: 0.2; }
+  72%      { transform: translate(3px, -38px); opacity: 0.12; }
+  92%      { opacity: 0; }
+}
+
+@keyframes ff5 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  6%       { opacity: 0.22; }
+  38%      { transform: translate(8px, -32px); opacity: 0.17; }
+  68%      { transform: translate(-2px, -52px); opacity: 0.1; }
+  91%      { opacity: 0; }
+}
+
+@keyframes ff6 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  14%      { opacity: 0.14; }
+  48%      { transform: translate(-10px, -26px); opacity: 0.19; }
+  76%      { transform: translate(-6px, -42px); opacity: 0.11; }
+  93%      { opacity: 0; }
+}
+
+@keyframes ff7 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  9%       { opacity: 0.2; }
+  44%      { transform: translate(6px, -22px); opacity: 0.16; }
+  74%      { transform: translate(-3px, -40px); opacity: 0.12; }
+  94%      { opacity: 0; }
+}
+
+@keyframes ff8 {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  11%      { opacity: 0.17; }
+  46%      { transform: translate(-9px, -28px); opacity: 0.21; }
+  78%      { transform: translate(5px, -46px); opacity: 0.1; }
+  92%      { opacity: 0; }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .forest-bg__mist,
+  .forest-bg__firefly,
+  .forest-bg__sway {
+    animation: none !important;
+  }
+
+  .forest-bg__firefly {
+    opacity: 0.12 !important;
+  }
+}

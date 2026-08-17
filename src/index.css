@@ -1,8 +1,17 @@
 @import 'tailwindcss';
+@import './dashboard.css';
+
+@theme {
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 :root {
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 16px/1.5 var(--sans);
@@ -19,9 +28,15 @@ body {
   margin: 0;
 }
 
+@keyframes slowFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 #root {
   width: 100%;
   min-height: 100svh;
+  animation: slowFadeIn 2s ease-in-out;
 }
 
 h1, h2 {

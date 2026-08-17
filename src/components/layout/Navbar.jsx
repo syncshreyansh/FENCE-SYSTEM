@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
 import SpecularButton from '../common/SpecularButton';
 
 const NAV_ITEMS = [
@@ -8,6 +10,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Home');
   const [scrolled, setScrolled] = useState(false);
 
@@ -35,7 +38,7 @@ export default function Navbar() {
         transition-all duration-300
         ${scrolled
           ? 'bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.06]'
-          : 'bg-[#0a0a0b] border-b border-transparent'
+          : 'bg-transparent border-b border-transparent'
         }
       `}
     >
@@ -50,14 +53,21 @@ export default function Navbar() {
               onClick={() => handleNavClick(item)}
               className={`
                 relative px-5 py-2 rounded-full text-sm font-medium
-                transition-all duration-200 cursor-pointer
+                transition-colors duration-200 cursor-pointer
                 ${isActive
-                  ? 'bg-white text-[#0a0a0b] shadow-sm'
-                  : 'bg-transparent text-neutral-400 hover:text-neutral-200'
+                  ? 'text-[#0a0a0b]'
+                  : 'text-neutral-400 hover:text-neutral-200'
                 }
               `}
             >
-              {item.label}
+              {isActive && (
+                <motion.div
+                  layoutId="activeNavPill"
+                  className="absolute inset-0 bg-white rounded-full shadow-sm"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{item.label}</span>
             </button>
           );
         })}
@@ -69,6 +79,7 @@ export default function Navbar() {
         radius={999}
         baseColor="#525252"
         lineColor="#ffffff"
+        onClick={() => navigate('/dashboard')}
       >
         Go to Dashboard &nbsp;→
       </SpecularButton>

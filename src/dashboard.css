@@ -1,0 +1,186 @@
+/* ── Custom theme tokens (Tailwind v4) ── */
+@theme {
+  /* Typography */
+  --text-display-lg: 28px;
+  --text-display-lg--line-height: 36px;
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-title-sm: 16px;
+  --text-title-sm--line-height: 24px;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-body-sm: 12px;
+  --text-body-sm--line-height: 18px;
+  --text-label-xs: 11px;
+  --text-label-xs--line-height: 14px;
+
+  /* Backgrounds */
+  --color-background:                  #0a0a0a;   /* true near-black page bg */
+  --color-surface:                     #111111;   /* card inner panels */
+  --color-surface-dim:                 #080808;
+  --color-surface-bright:              #1a1a1a;
+
+  /* Surface containers — layered dark greys */
+  --color-surface-container-lowest:    #161616;   /* cards, sidebar */
+  --color-surface-container-low:       #1e1e1e;   /* hover states, table alt rows */
+  --color-surface-container:           #242424;   /* nested panels */
+  --color-surface-container-high:      #2e2e2e;   /* borders, dividers */
+  --color-surface-container-highest:   #383838;   /* strongest borders */
+
+  /* Text */
+  --color-on-surface:                  #e8e6de;   /* primary text */
+  --color-on-surface-variant:          #9a9b8f;   /* secondary / muted text */
+  --color-inverse-surface:             #e8e6de;
+  --color-inverse-on-surface:          #111111;
+
+  /* Outline / borders */
+  --color-outline:                     #4a4b40;
+  --color-outline-variant:             #2e2e2e;
+
+  /* Brand olive green (keep hue, adapt lightness for dark bg) */
+  --color-primary:                     #bdce84;   /* bright olive on dark */
+  --color-on-primary:                  #1a2300;
+  --color-primary-container:           #3a4a18;   /* muted green for chips/badges */
+  --color-on-primary-container:        #d9eb9e;
+  --color-inverse-primary:             #5c6b2c;
+  --color-surface-tint:                #bdce84;
+
+  /* Secondary */
+  --color-secondary:                   #c3caa4;
+  --color-on-secondary:                #2d3318;
+  --color-secondary-container:         #3a3f28;
+  --color-on-secondary-container:      #dfe6bf;
+  --color-secondary-fixed-dim:         #7a8260;
+
+  /* Tertiary (purple accent) */
+  --color-tertiary:                    #e9b6eb;
+  --color-on-tertiary:                 #3f1044;
+  --color-tertiary-container:          #5a3060;
+  --color-on-tertiary-container:       #ffd6ff;
+
+  /* Error / red */
+  --color-error:                       #ffb4ab;
+  --color-on-error:                    #690005;
+  --color-error-container:             #93000a;
+  --color-on-error-container:          #ffdad6;
+
+  /* On-background */
+  --color-on-background:               #e8e6de;
+
+  /* Spacing */
+  --spacing-padding-card: 24px;
+  --spacing-sidebar-width: 260px;
+  --spacing-header-height: 72px;
+  --spacing-margin-page: 24px;
+  --spacing-gutter-grid: 20px;
+  --spacing-space-xs: 4px;
+  --spacing-space-sm: 8px;
+  --spacing-space-md: 16px;
+  --spacing-space-lg: 24px;
+
+  /* Shadows */
+  --shadow-card:     0px 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-dropdown: 0px 8px 32px rgba(0, 0, 0, 0.7);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-outlined.icon-fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* CSS Gauge */
+.gauge-container {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  overflow: hidden;
+}
+.gauge-arc {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 12px solid var(--color-surface-container-high);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+.gauge-fill {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 12px solid var(--color-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  transform: rotate(-135deg); /* Base rotation */
+}
+
+/* Nav Link Glow */
+.nav-active-glow {
+  box-shadow: inset 0 0 0 1px rgba(189, 206, 132, 0.15),
+              0 0 12px rgba(189, 206, 132, 0.08);
+}
+
+/* Stat Card Hover */
+.stat-card > div {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.stat-card > div:hover {
+  border-color: rgba(189, 206, 132, 0.3);
+  box-shadow: 0px 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(189, 206, 132, 0.1);
+}
+
+/* Alert Items */
+.alert-item {
+  background-color: #1e1e1e !important;
+}
+
+/* Leaflet Map Warm Filter */
+.leaflet-tile-pane {
+  filter: sepia(8%) saturate(90%) brightness(102%) hue-rotate(5deg);
+}
+
+/* Leaflet Tooltip */
+.leaflet-tooltip {
+  background-color: #161616 !important;
+  color: #e8e6de !important;
+  border: 1px solid #2e2e2e !important;
+  border-radius: 8px !important;
+  font-family: 'Hanken Grotesk', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.leaflet-tooltip-top::before {
+  border-top-color: #2e2e2e !important;
+}
+.leaflet-tooltip-bottom::before {
+  border-bottom-color: #2e2e2e !important;
+}
+.leaflet-tooltip-left::before {
+  border-left-color: #2e2e2e !important;
+}
+.leaflet-tooltip-right::before {
+  border-right-color: #2e2e2e !important;
+}
+
+/* Leaflet Attribution */
+.leaflet-control-attribution {
+  background-color: rgba(245, 240, 232, 0.85) !important;
+  color: #6b6b5a !important;
+  font-size: 10px !important;
+  border-radius: 4px 0 0 0 !important;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-control-attribution a {
+  color: #3a5a1a !important;
+}
