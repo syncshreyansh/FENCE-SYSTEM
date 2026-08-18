@@ -4,8 +4,93 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import ModelViewerModal from '../common/ModelViewerModal';
 import { Cpu, Zap, Satellite, ArrowRight } from 'lucide-react';
+import { useMouseOriginFill } from '../../hooks/useMouseOriginFill';
 
 gsap.registerPlugin(ScrollTrigger);
+
+function AnimatedSolutionButton({ onClick, isActive, children, className = '' }) {
+  const { buttonRef, fillRef } = useMouseOriginFill({
+    fillColor: '#84cc16',
+    enterDuration: 0.48,
+    exitDuration: 0.4,
+    ease: 'power3.out',
+    onEnter: (btn) => {
+      const text = btn.querySelector('.btn-label');
+      if (text) {
+        gsap.to(text, { color: '#000000', duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+      }
+    },
+    onExit: (btn) => {
+      const text = btn.querySelector('.btn-label');
+      if (text) {
+        gsap.to(text, { color: isActive ? '#84cc16' : '#DFD9CE', duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+      }
+    },
+  });
+
+  return (
+    <button
+      ref={buttonRef}
+      onClick={onClick}
+      className={`relative overflow-hidden cursor-pointer outline-none transition-colors border ${
+        isActive
+          ? 'bg-[#84cc16]/10 border-[#84cc16] shadow-[0_0_15px_rgba(132,204,22,0.25)]'
+          : 'bg-white/5 border-white/10 hover:border-[#84cc16]/50'
+      } rounded-none px-6 py-2.5 font-bold uppercase tracking-wider text-xs sm:text-sm z-20 ${className}`}
+      style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+    >
+      <span ref={fillRef} className="pointer-events-none" />
+      <span
+        className={`btn-label relative z-10 pointer-events-none transition-colors ${
+          isActive ? 'text-[#84cc16]' : 'text-[#DFD9CE]'
+        }`}
+      >
+        {children}
+      </span>
+    </button>
+  );
+}
+
+function CadSecondaryActionButton({ isPcbView, onClick }) {
+  const { buttonRef, fillRef } = useMouseOriginFill({
+    fillColor: '#84cc16',
+    enterDuration: 0.48,
+    exitDuration: 0.4,
+    ease: 'power3.out',
+    onEnter: (btn) => {
+      const text = btn.querySelector('.btn-label');
+      if (text) {
+        gsap.to(text, { color: '#000000', duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+      }
+    },
+    onExit: (btn) => {
+      const text = btn.querySelector('.btn-label');
+      if (text) {
+        gsap.to(text, { color: '#000000', duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+      }
+    },
+  });
+
+  return (
+    <button
+      ref={buttonRef}
+      onClick={onClick}
+      className="relative overflow-hidden px-6 py-3 bg-[#84cc16] text-black font-bold rounded-none shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all flex items-center gap-2 tracking-wide uppercase text-sm cursor-pointer border border-[#84cc16]"
+      style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+    >
+      <span ref={fillRef} className="pointer-events-none" />
+      <span className="btn-label relative z-10 pointer-events-none flex items-center gap-2">
+        {isPcbView ? (
+          <>
+            <span>&larr;</span> Back to CAD
+          </>
+        ) : (
+          'View PCB'
+        )}
+      </span>
+    </button>
+  );
+}
 
 export default function SolutionSectionComponent() {
   const sectionRef = useRef(null);
@@ -70,128 +155,176 @@ export default function SolutionSectionComponent() {
   const cadModelPath = isPcbView ? '/assets/models/pcb.glb' : '/assets/models/cad-design.glb';
   const cadTitle = isPcbView ? 'PCB Layout' : 'CAD Design';
 
-  const CadSecondaryAction = () => (
-    <button
-      onClick={() => setCadViewState(isPcbView ? 'cad' : 'pcb')}
-      className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-full shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all flex items-center gap-2 tracking-wide uppercase text-sm cursor-pointer"
-    >
-      {isPcbView ? (
-        <>
-          <span>&larr;</span> Back to CAD
-        </>
-      ) : (
-        'View PCB'
-      )}
-    </button>
-  );
-
   return (
-    <div className="bg-[#0a0a0b] text-white py-24 font-sans w-full relative overflow-hidden" ref={sectionRef}>
-      {/* Typography */}
+    <div className="bg-[#000000] text-white py-24 font-sans w-full relative overflow-hidden" ref={sectionRef}>
+      {/* Typography matching Homepage Hero */}
       <div ref={headingRef} className="w-full max-w-7xl px-6 lg:px-8 mx-auto">
-        <h2 className="text-6xl md:text-8xl font-black uppercase tracking-widest text-left mb-6" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+        <h2
+          className="text-[#E8E3D9] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] 2xl:text-[96px] 3xl:text-[116px] 4xl:text-[144px] 5xl:text-[164px] leading-[0.9] m-0 p-0 tracking-tight uppercase font-black text-left mb-6"
+          style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900 }}
+        >
           Central Solution Core
         </h2>
-        <p className="text-gray-400 text-left max-w-2xl mb-20 font-sans">
+        <p className="text-[#DFD9CE]/70 text-left max-w-2xl mb-16 sm:mb-20 font-sans text-sm sm:text-base leading-relaxed">
           Next-generation hardware control systems. Real-time data processing, telemetry, and power distribution managed through a unified neural architecture.
         </p>
       </div>
 
       {/* Showcase Stage */}
-      <div ref={imageRef} className="relative w-full max-w-7xl px-6 lg:px-8 mx-auto mb-24">
+      <div ref={imageRef} className="relative w-full max-w-7xl px-6 lg:px-8 mx-auto mb-20">
         <img 
-          className="w-full rounded-3xl shadow-[0_0_50px_rgba(182,226,50,0.1)] block" 
+          className="w-full rounded-2xl shadow-[0_0_50px_rgba(132,204,22,0.12)] block border border-white/10" 
           src="/assets/images/farm-solution-diagram.png" 
           alt="Smart fence system" 
         />
         
         {/* Left Card */}
-        <div className="absolute z-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hidden md:block top-1/4 -left-12">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_cyan] animate-pulse"></div>
-            <span className="text-xs font-bold tracking-widest text-cyan-400">DATA LINK ACTIVE</span>
+        <div className="absolute z-10 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-5 shadow-2xl hidden md:block top-1/4 -left-6 lg:-left-10">
+          <div className="flex items-center gap-2 mb-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_cyan] animate-pulse"></div>
+            <span 
+              className="text-xs font-bold tracking-widest text-cyan-400 uppercase"
+              style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+            >
+              DATA LINK ACTIVE
+            </span>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm text-gray-400">UPLINK SPEED</span>
-            <span className="text-3xl tracking-wider" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>1.2 GB/S</span>
+            <span 
+              className="text-[11px] text-[#DFD9CE]/60 uppercase tracking-wider"
+              style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+            >
+              UPLINK SPEED
+            </span>
+            <span 
+              className="text-2xl lg:text-3xl font-black text-[#E8E3D9] tracking-tight leading-tight" 
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+            >
+              1.2 GB/S
+            </span>
           </div>
         </div>
         
         {/* Right Card */}
-        <div className="absolute z-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hidden md:block bottom-1/4 -right-12">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-3 h-3 rounded-full bg-lime-400 shadow-[0_0_10px_lime] animate-pulse"></div>
-            <span className="text-xs font-bold tracking-widest text-[#B6E232]">POWER MATRIX</span>
+        <div className="absolute z-10 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-5 shadow-2xl hidden md:block bottom-1/4 -right-6 lg:-right-10">
+          <div className="flex items-center gap-2 mb-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#84cc16] shadow-[0_0_10px_rgba(132,204,22,0.8)] animate-pulse"></div>
+            <span 
+              className="text-xs font-bold tracking-widest text-[#84cc16] uppercase"
+              style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+            >
+              POWER MATRIX
+            </span>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm text-gray-400">GRID STABILITY</span>
-            <span className="text-3xl tracking-wider" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>99.99%</span>
+            <span 
+              className="text-[11px] text-[#DFD9CE]/60 uppercase tracking-wider"
+              style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+            >
+              GRID STABILITY
+            </span>
+            <span 
+              className="text-2xl lg:text-3xl font-black text-[#E8E3D9] tracking-tight leading-tight" 
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+            >
+              99.99%
+            </span>
           </div>
         </div>
       </div>
 
-      {/* View Toggle */}
-      <div className="flex justify-center gap-4 mb-24">
-        <button 
+      {/* View Toggle with Sharp Edges and Mouse-Origin Fill */}
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-20 px-4">
+        <AnimatedSolutionButton
+          isActive={activeModal === 'cad' && cadViewState === 'cad'}
           onClick={() => { setCadViewState('cad'); setActiveModal('cad'); }}
-          className="bg-[#B6E232]/20 border border-[#B6E232] text-[#B6E232] px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(182,226,50,0.3)] hover:bg-[#B6E232]/30 transition-all uppercase tracking-wider text-sm cursor-pointer z-20"
         >
           System Overview
-        </button>
-        <button 
+        </AnimatedSolutionButton>
+        <AnimatedSolutionButton
+          isActive={activeModal === 'cad' && cadViewState === 'pcb'}
           onClick={() => { setCadViewState('pcb'); setActiveModal('cad'); }}
-          className="bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 px-6 py-2 rounded-full font-bold transition-all uppercase tracking-wider text-sm cursor-pointer z-20"
         >
           Internal PCB
-        </button>
-        <button 
+        </AnimatedSolutionButton>
+        <AnimatedSolutionButton
+          isActive={activeModal === 'antenna'}
           onClick={() => setActiveModal('antenna')}
-          className="bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 px-6 py-2 rounded-full font-bold transition-all uppercase tracking-wider text-sm cursor-pointer z-20"
         >
           Antenna Module
-        </button>
+        </AnimatedSolutionButton>
       </div>
 
       {/* Feature Grid */}
-      <div ref={featureGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl px-6 lg:px-8 mx-auto">
+      <div ref={featureGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 w-full max-w-7xl px-6 lg:px-8 mx-auto">
         {/* Card 1 */}
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col">
-          <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-6">
-            <Cpu className="text-cyan-400 w-6 h-6" />
+        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-7 lg:p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-6">
+              <Cpu className="text-cyan-400 w-6 h-6" />
+            </div>
+            <h3 
+              className="text-2xl sm:text-3xl font-black text-[#E8E3D9] tracking-tight mb-3" 
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+            >
+              Neural Core
+            </h3>
+            <p className="text-[#DFD9CE]/70 mb-6 text-sm leading-relaxed font-sans">
+              Dedicated AI processing unit capable of executing 40 trillion operations per second for instant threat detection and anomaly isolation.
+            </p>
           </div>
-          <h3 className="text-3xl tracking-wider mb-3" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>Neural Core</h3>
-          <p className="text-gray-400 mb-6 flex-grow text-sm">
-            Dedicated AI processing unit capable of executing 40 trillion operations per second for instant threat detection and anomaly isolation.
-          </p>
-          <div className="flex items-center text-cyan-400 text-xs font-bold tracking-widest uppercase group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+          <div 
+            className="flex items-center text-[#DFD9CE] group-hover:text-cyan-400 text-xs font-bold tracking-widest uppercase group-hover:translate-x-1.5 transition-all duration-300 mt-auto"
+            style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+          >
             VIEW SPECS <ArrowRight className="ml-2 w-4 h-4" />
           </div>
         </div>
         
         {/* Card 2 */}
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col">
-          <div className="w-12 h-12 rounded-xl bg-[#B6E232]/10 border border-[#B6E232]/30 flex items-center justify-center mb-6">
-            <Zap className="text-[#B6E232] w-6 h-6" />
+        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-7 lg:p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div className="w-12 h-12 rounded-xl bg-[#84cc16]/10 border border-[#84cc16]/30 flex items-center justify-center mb-6">
+              <Zap className="text-[#84cc16] w-6 h-6" />
+            </div>
+            <h3 
+              className="text-2xl sm:text-3xl font-black text-[#E8E3D9] tracking-tight mb-3" 
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+            >
+              Power Grid
+            </h3>
+            <p className="text-[#DFD9CE]/70 mb-6 text-sm leading-relaxed font-sans">
+              High-efficiency distributed power routing with redundant failovers, ensuring 99.99% uptime even in extreme environmental conditions.
+            </p>
           </div>
-          <h3 className="text-3xl tracking-wider mb-3" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>Power Grid</h3>
-          <p className="text-gray-400 mb-6 flex-grow text-sm">
-            High-efficiency distributed power routing with redundant failovers, ensuring 99.99% uptime even in extreme environmental conditions.
-          </p>
-          <div className="flex items-center text-[#B6E232] text-xs font-bold tracking-widest uppercase group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+          <div 
+            className="flex items-center text-[#DFD9CE] group-hover:text-[#84cc16] text-xs font-bold tracking-widest uppercase group-hover:translate-x-1.5 transition-all duration-300 mt-auto"
+            style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+          >
             VIEW SPECS <ArrowRight className="ml-2 w-4 h-4" />
           </div>
         </div>
         
         {/* Card 3 */}
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col">
-          <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center mb-6">
-            <Satellite className="text-white w-6 h-6" />
+        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-7 lg:p-8 hover:border-white/20 transition-all duration-300 group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center mb-6">
+              <Satellite className="text-white w-6 h-6" />
+            </div>
+            <h3 
+              className="text-2xl sm:text-3xl font-black text-[#E8E3D9] tracking-tight mb-3" 
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
+            >
+              Remote Comms
+            </h3>
+            <p className="text-[#DFD9CE]/70 mb-6 text-sm leading-relaxed font-sans">
+              Encrypted long-range telemetry link maintaining constant contact with orbital relays and centralized dashboard nodes.
+            </p>
           </div>
-          <h3 className="text-3xl tracking-wider mb-3" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>Remote Comms</h3>
-          <p className="text-gray-400 mb-6 flex-grow text-sm">
-            Encrypted long-range telemetry link maintaining constant contact with orbital relays and centralized dashboard nodes.
-          </p>
-          <div className="flex items-center text-white text-xs font-bold tracking-widest uppercase group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+          <div 
+            className="flex items-center text-[#DFD9CE] group-hover:text-white text-xs font-bold tracking-widest uppercase group-hover:translate-x-1.5 transition-all duration-300 mt-auto"
+            style={{ fontFamily: '"JetBrains Mono", ui-monospace, monospace' }}
+          >
             VIEW SPECS <ArrowRight className="ml-2 w-4 h-4" />
           </div>
         </div>
@@ -203,7 +336,7 @@ export default function SolutionSectionComponent() {
         onClose={handleCloseModal}
         modelPath={cadModelPath}
         title={cadTitle}
-        secondaryAction={<CadSecondaryAction />}
+        secondaryAction={<CadSecondaryActionButton isPcbView={isPcbView} onClick={() => setCadViewState(isPcbView ? 'cad' : 'pcb')} />}
       />
 
       <ModelViewerModal

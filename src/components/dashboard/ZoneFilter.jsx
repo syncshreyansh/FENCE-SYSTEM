@@ -23,14 +23,14 @@ export default function ZoneFilter({ activeZone, onZoneChange }) {
   }, [activeZone]);
 
   return (
-    <div className="flex justify-center mt-2">
+    <div className="flex justify-center mt-2 select-none">
       <div 
         ref={containerRef} 
-        className="relative flex items-center bg-surface-container rounded-full p-1 gap-0.5"
+        className="relative flex items-center bg-surface-container-lowest border border-surface-container-high rounded-full p-1 gap-1 shadow-sm"
       >
         <div 
           ref={pillRef} 
-          className="absolute top-1 bottom-1 left-0 bg-primary-container rounded-full pointer-events-none shadow-sm"
+          className="absolute top-1 bottom-1 left-0 bg-primary-container border border-primary/30 rounded-full pointer-events-none shadow-sm"
           style={{ width: 0 }}
         />
         
@@ -43,10 +43,10 @@ export default function ZoneFilter({ activeZone, onZoneChange }) {
               type="button"
               onClick={() => onZoneChange(zone)}
               className={`
-                relative z-10 px-6 py-2 rounded-full text-[13px] font-semibold
-                transition-colors duration-200 cursor-pointer
+                relative z-10 px-5 py-1.5 rounded-full text-[12px] font-mono font-bold
+                transition-colors duration-200 cursor-pointer uppercase tracking-wider
                 ${isActive
-                  ? 'text-on-primary-container'
+                  ? 'text-primary'
                   : 'text-on-surface-variant hover:text-on-surface'
                 }
               `}

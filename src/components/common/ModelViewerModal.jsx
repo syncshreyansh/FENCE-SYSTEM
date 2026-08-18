@@ -110,7 +110,6 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
         <div ref={canvasWrapperRef} className="flex-1 w-full h-full relative cursor-grab active:cursor-grabbing">
           <Suspense fallback={<LoadingFallback />}>
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <color attach="background" args={['transparent']} />
               <Stage environment="city" intensity={0.6}>
                 <Model url={modelPath} />
               </Stage>

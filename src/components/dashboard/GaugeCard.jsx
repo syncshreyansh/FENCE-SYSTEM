@@ -1,71 +1,51 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { Gauge, MoreVertical } from 'lucide-react';
 
 export default function GaugeCard() {
-  const arcRef = useRef(null);
-  const numberRef = useRef(null);
   const value = 6.1; // 6.1%
-
-  useEffect(() => {
-    // Animate arc rotation from -135deg (0%) to actual percentage
-    // Max rotation is 135deg (100%). Total range is 270deg.
-    const maxRot = 135;
-    const minRot = -135;
-    const targetRot = minRot + (270 * (value / 100));
-
-    if (arcRef.current) {
-      gsap.fromTo(arcRef.current, 
-        { rotation: minRot },
-        { rotation: targetRot, duration: 1.5, ease: 'power3.out', delay: 0.2 }
-      );
-    }
-
-    if (numberRef.current) {
-      const obj = { val: 0 };
-      gsap.to(obj, {
-        val: value,
-        duration: 1.5,
-        ease: 'power3.out',
-        delay: 0.2,
-        onUpdate: () => {
-          if (numberRef.current) {
-            numberRef.current.innerText = obj.val.toFixed(1) + '%';
-          }
-        }
-      });
-    }
-  }, [value]);
+  const minRot = -135;
+  const targetRot = minRot + (270 * (value / 100));
 
   return (
-    <div className="bg-surface-container-lowest border border-surface-container-low shadow-[0px_4px_20px_rgba(0,0,0,0.04)] rounded-2xl p-6 flex flex-col h-full min-h-[220px]">
+    <div className="bg-surface-container-lowest border border-surface-container-low shadow-[0px_4px_20px_rgba(0,0,0,0.04)] rounded-2xl p-5 lg:p-6 flex flex-col h-full min-h-[220px] justify-between select-none">
       {/* Header */}
-      <div className="flex justify-between items-start mb-4 shrink-0">
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-on-surface-variant">speed</span>
+      <div className="flex justify-between items-start shrink-0">
+        <div className="flex items-start gap-3.5 min-w-0">
+          <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-on-surface-variant">
+            <Gauge className="w-5 h-5" />
           </div>
-          <div>
-            <h3 className="text-[14px] font-semibold text-on-surface leading-tight mt-1">Avg Duty Cycle</h3>
-            <p className="text-[12px] text-on-surface-variant mt-0.5">Last 24 hours</p>
+          <div className="min-w-0">
+            <h3 className="text-[14px] font-bold text-on-surface leading-tight tracking-tight truncate">Avg Duty Cycle</h3>
+            <p className="text-[11px] sm:text-[12px] text-on-surface-variant font-mono mt-0.5 truncate opacity-75">Last 24 hours</p>
           </div>
         </div>
-        <button className="material-symbols-outlined text-outline hover:text-on-surface transition-colors">more_vert</button>
+        <button 
+          aria-label="Options" 
+          className="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors shrink-0"
+        >
+          <MoreVertical className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* Inner White/Surface panel */}
-      <div className="mt-4 flex-1 bg-surface py-6 px-4 rounded-xl flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Inner panel */}
+      <div className="mt-4 flex-1 bg-surface py-4 px-4 rounded-xl flex flex-col items-center justify-center relative overflow-hidden border border-surface-container-high/40">
         <div className="gauge-container relative z-10 flex items-end justify-center">
           {/* Background Arc */}
           <div className="gauge-arc"></div>
           {/* Foreground Fill Arc */}
-          <div ref={arcRef} className="gauge-fill"></div>
+          <div className="gauge-fill" style={{ transform: `rotate(${targetRot}deg)` }}></div>
           
           {/* Inner Value Text */}
-          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex flex-col items-center">
-            <span ref={numberRef} className="text-[40px] font-display font-bold text-on-surface leading-none mb-1">0.0%</span>
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+            <span className="text-[30px] lg:text-[34px] font-sans font-black tracking-tight text-on-surface leading-none mb-0.5">
+              {value.toFixed(1)}%
+            </span>
           </div>
         </div>
-        <span className="text-[11px] text-on-surface-variant font-medium uppercase tracking-wider mt-4 z-10">Optimal</span>
+        <div className="mt-2.5 z-10">
+          <span className="inline-block bg-primary-container text-on-primary-container text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md border border-primary/20">
+            Optimal
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -6,31 +6,38 @@ import { annotate } from "rough-notation"
 
 export function Highlighter({
   children,
-  action = "highlight",
-  color = "#ffd1dc",
-  strokeWidth = 1.5,
-  animationDuration = 600,
+  action = "circle",
+  color = "#84cc16",
+  strokeWidth = 3.5,
+  animationDuration = 1200,
   iterations = 2,
-  padding = 2,
+  padding = [6, 16, 6, 16],
   multiline = true,
   isView = false,
+  className = "",
 }) {
   const elementRef = useRef(null)
 
   const isInView = useInView(elementRef, {
     once: true,
-    margin: "-10%",
+    margin: "-5%",
   })
 
-  // If isView is false, always show. If isView is true, wait for inView
   const shouldShow = !isView || isInView
 
   useLayoutEffect(() => {
     const element = elementRef.current
-    let annotation = null
-    let resizeObserver = null
+    if (!element || !shouldShow) return undefined
 
-    if (shouldShow && element) {
+    let annotation = null
+
+    const createAndShow = () => {
+      if (annotation) {
+        try {
+          annotation.remove()
+        } catch {}
+      }
+
       const annotationConfig = {
         type: action,
         color,
@@ -41,24 +48,33 @@ export function Highlighter({
         multiline,
       }
 
-      const currentAnnotation = annotate(element, annotationConfig)
-      annotation = currentAnnotation
-      currentAnnotation.show()
-
-      resizeObserver = new ResizeObserver(() => {
-        currentAnnotation.hide()
-        currentAnnotation.show()
-      })
-
-      resizeObserver.observe(element)
-      resizeObserver.observe(document.body)
+      annotation = annotate(element, annotationConfig)
+      annotation.show()
     }
 
+    // Delay slightly to let initial GSAP and font rendering stabilize
+    const timer = setTimeout(() => {
+      createAndShow()
+    }, 150)
+
+    // Re-render when fonts are loaded
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        setTimeout(() => {
+          createAndShow()
+        }, 80)
+      })
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      createAndShow()
+    })
+    resizeObserver.observe(element)
+
     return () => {
+      clearTimeout(timer)
       annotation?.remove()
-      if (resizeObserver) {
-        resizeObserver.disconnect()
-      }
+      resizeObserver.disconnect()
     }
   }, [
     shouldShow,
@@ -72,7 +88,7 @@ export function Highlighter({
   ])
 
   return (
-    <span ref={elementRef} className="relative inline-block bg-transparent">
+    <span ref={elementRef} className={`relative inline-block bg-transparent ${className}`}>
       {children}
     </span>
   )

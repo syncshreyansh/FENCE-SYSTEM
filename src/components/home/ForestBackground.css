@@ -7,8 +7,8 @@
   z-index: 0;
 
   /* Static forest image, treeline anchored to bottom */
-  background-color: #060a06;
-  background-image: url('/assets/forest/forest.png');
+  background-color: #000000;
+  background-image: url('/assets/forest/BG-CHANGED.png');
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;
@@ -54,7 +54,7 @@
   100% { transform: translateX(25%); }
 }
 
-/* ── Bottom fade to match next section (#0a0a0b) ── */
+/* ── Bottom fade to match next section (#000000) ── */
 
 .forest-bg__fade {
   position: absolute;
@@ -66,11 +66,11 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(10, 10, 11, 0.15) 20%,
-    rgba(10, 10, 11, 0.4) 40%,
-    rgba(10, 10, 11, 0.7) 60%,
-    rgba(10, 10, 11, 0.9) 80%,
-    #0a0a0b 100%
+    rgba(0, 0, 0, 0.15) 20%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.7) 60%,
+    rgba(0, 0, 0, 0.9) 80%,
+    #000000 100%
   );
   z-index: 1;
 }
@@ -85,7 +85,7 @@
   transform-origin: center bottom;
 
   /* Show same forest image, pixel-aligned with the static background */
-  background-image: url('/assets/forest/forest.png');
+  background-image: url('/assets/forest/BG-CHANGED.png');
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;

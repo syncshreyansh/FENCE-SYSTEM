@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import { NavbarContext } from '../../context/NavbarContext'
 
 const MENU_ITEMS = [
-  { label: 'Home', hoverText: 'KNOW ABOUT US', type: 'section', target: 'home' },
-  { label: 'Problem', hoverText: 'THE EXACT PROBLEM', type: 'section', target: 'problem' },
-  { label: 'Solution', hoverText: "WHAT WE'VE BUILT", type: 'section', target: 'solution' },
-  { label: 'Dashboard', hoverText: 'KNOW THE STATS', type: 'route', target: '/dashboard' },
+  { label: 'Home', hoverText: 'KNOW ABOUT US', path: '/' },
+  { label: 'Problem', hoverText: 'THE EXACT PROBLEM', path: '/problem' },
+  { label: 'Solution', hoverText: "WHAT WE'VE BUILT", path: '/solution' },
+  { label: 'Dashboard', hoverText: 'KNOW THE STATS', path: '/dashboard' },
 ]
 
 const MarqueeRow = ({ text }) => (
@@ -43,7 +43,8 @@ const MarqueeRow = ({ text }) => (
 export default function FullScreenNav() {
   const containerRef = useRef(null)
   const isInitialMount = useRef(true)
-  const [navOpen, setNavOpen] = useContext(NavbarContext)
+  const pendingRoute = useRef(null)
+  const [navOpen, setNavOpen, , setIsTransitioning] = useContext(NavbarContext)
   const navigate = useNavigate()
 
   /* ── GSAP Animations ── */
@@ -115,15 +116,23 @@ export default function FullScreenNav() {
         const tl = gsap.timeline({
           onComplete: () => {
             gsap.set(overlay, { display: 'none' })
+            if (pendingRoute.current) {
+              const target = pendingRoute.current
+              pendingRoute.current = null
+              navigate(target)
+              if (setIsTransitioning) {
+                setIsTransitioning(false)
+              }
+            }
           },
         })
 
-        // 1. Links fade & rotate out quickly
+        // 1. Links fade & rotate out smoothly
         tl.to(links, {
           opacity: 0,
           rotateX: 90,
-          duration: 0.25,
-          stagger: 0.04,
+          duration: 0.22,
+          stagger: 0.03,
           ease: 'power2.in',
         })
 
@@ -132,26 +141,26 @@ export default function FullScreenNav() {
           navMeta,
           {
             opacity: 0,
-            duration: 0.2,
+            duration: 0.18,
             ease: 'power2.in',
           },
           0
         )
 
-        // 3. Stairs wipe down towards bottom to exit and reveal page underneath (reverse stagger: from left to right)
+        // 3. Stairs wipe down towards bottom to exit completely (reverse stagger: from left to right)
         tl.set(stairs, { transformOrigin: 'bottom center' })
         tl.to(
           stairs,
           {
             scaleY: 0,
-            duration: 0.6,
+            duration: 0.55,
             stagger: {
-              amount: 0.25,
+              amount: 0.22,
               from: 'start',
             },
             ease: 'power4.inOut',
           },
-          0.15
+          0.1
         )
       }
     },
@@ -174,22 +183,38 @@ export default function FullScreenNav() {
   useEffect(() => {
     if (!navOpen) return undefined
     const onKeyDown = (e) => {
-      if (e.key === 'Escape') setNavOpen(false)
+      if (e.key === 'Escape') {
+        pendingRoute.current = null
+        if (setIsTransitioning) setIsTransitioning(false)
+        setNavOpen(false)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [navOpen, setNavOpen])
+  }, [navOpen, setNavOpen, setIsTransitioning])
 
   const handleSelect = (item) => {
+    if (setIsTransitioning) {
+      setIsTransitioning(true)
+    }
+    pendingRoute.current = item.path
     setNavOpen(false)
-    setTimeout(() => {
-      if (item.type === 'section') {
-        const section = document.getElementById(item.target)
-        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      } else {
-        navigate(item.target)
-      }
-    }, 650)
+  }
+
+  const handleClose = () => {
+    pendingRoute.current = null
+    if (setIsTransitioning) {
+      setIsTransitioning(false)
+    }
+    setNavOpen(false)
+  }
+
+  const handleLogoClick = () => {
+    if (setIsTransitioning) {
+      setIsTransitioning(true)
+    }
+    pendingRoute.current = '/'
+    setNavOpen(false)
   }
 
   return (
@@ -213,13 +238,7 @@ export default function FullScreenNav() {
           <div className="navmeta flex w-full justify-between items-center p-4 lg:p-6">
             <button
               type="button"
-              onClick={() => {
-                setNavOpen(false)
-                setTimeout(() => {
-                  const section = document.getElementById('home')
-                  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }, 650)
-              }}
+              onClick={handleLogoClick}
               className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
               aria-label="Home"
             >
@@ -231,12 +250,12 @@ export default function FullScreenNav() {
             </button>
             <button
               type="button"
-              onClick={() => setNavOpen(false)}
+              onClick={handleClose}
               aria-label="Close menu"
               className="group relative w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
             >
-              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#108730] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
-              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#108730] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#84cc16] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
+              <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#84cc16] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
             </button>
           </div>
 
@@ -264,16 +283,16 @@ export default function FullScreenNav() {
                   }`}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Default static label with DM Sans 900 font weight */}
+                  {/* Default static label with DM Sans 900 font weight and brand green color */}
                   <h1
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.5vw] font-black text-center uppercase tracking-tight leading-none py-3.5 sm:py-4.5 lg:py-5.5 text-white transition-colors duration-300"
-                    style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.5vw] font-black text-center uppercase tracking-tight leading-none py-3.5 sm:py-4.5 lg:py-5.5 !text-[#84cc16] transition-colors duration-300"
+                    style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900, color: '#84cc16' }}
                   >
                     {item.label}
                   </h1>
 
                   {/* Marquee band on hover with custom item hoverText, black text, and backgroundless logo */}
-                  <div className="moveLink absolute inset-0 bg-[#108730] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <div className="moveLink absolute inset-0 bg-[#84cc16] flex items-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <MarqueeRow text={item.hoverText} />
                     <MarqueeRow text={item.hoverText} />
                   </div>

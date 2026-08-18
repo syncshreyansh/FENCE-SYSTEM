@@ -14,43 +14,47 @@
   --text-label-xs: 11px;
   --text-label-xs--line-height: 14px;
 
+  /* Font Families */
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
   /* Backgrounds */
-  --color-background:                  #0a0a0a;   /* true near-black page bg */
-  --color-surface:                     #111111;   /* card inner panels */
-  --color-surface-dim:                 #080808;
-  --color-surface-bright:              #1a1a1a;
+  --color-background:                  #000000;   /* pure black page bg */
+  --color-surface:                     #0a0a0a;   /* card inner panels */
+  --color-surface-dim:                 #050505;
+  --color-surface-bright:              #121212;
 
-  /* Surface containers — layered dark greys */
-  --color-surface-container-lowest:    #161616;   /* cards, sidebar */
-  --color-surface-container-low:       #1e1e1e;   /* hover states, table alt rows */
-  --color-surface-container:           #242424;   /* nested panels */
-  --color-surface-container-high:      #2e2e2e;   /* borders, dividers */
-  --color-surface-container-highest:   #383838;   /* strongest borders */
+  /* Surface containers — layered subtle dark greys */
+  --color-surface-container-lowest:    #080808;   /* cards, sidebar */
+  --color-surface-container-low:       #0f0f0f;   /* hover states, table alt rows */
+  --color-surface-container:           #141414;   /* nested panels */
+  --color-surface-container-high:      #1f1f1f;   /* borders, dividers */
+  --color-surface-container-highest:   #282828;   /* strongest borders */
 
-  /* Text */
-  --color-on-surface:                  #e8e6de;   /* primary text */
-  --color-on-surface-variant:          #9a9b8f;   /* secondary / muted text */
-  --color-inverse-surface:             #e8e6de;
-  --color-inverse-on-surface:          #111111;
+  /* Text Colors */
+  --color-on-surface:                  #E8E3D9;   /* primary text */
+  --color-on-surface-variant:          #DFD9CE;   /* secondary / muted text */
+  --color-inverse-surface:             #E8E3D9;
+  --color-inverse-on-surface:          #000000;
 
   /* Outline / borders */
-  --color-outline:                     #4a4b40;
-  --color-outline-variant:             #2e2e2e;
+  --color-outline:                     #383838;
+  --color-outline-variant:             #1f1f1f;
 
-  /* Brand olive green (keep hue, adapt lightness for dark bg) */
-  --color-primary:                     #bdce84;   /* bright olive on dark */
-  --color-on-primary:                  #1a2300;
-  --color-primary-container:           #3a4a18;   /* muted green for chips/badges */
-  --color-on-primary-container:        #d9eb9e;
-  --color-inverse-primary:             #5c6b2c;
-  --color-surface-tint:                #bdce84;
+  /* Vibrant Homepage Lime Green (#84cc16) */
+  --color-primary:                     #84cc16;   /* vibrant lime */
+  --color-on-primary:                  #000000;
+  --color-primary-container:           #1e3204;   /* dark lime container for chips/badges */
+  --color-on-primary-container:        #d9f99d;   /* light lime text */
+  --color-inverse-primary:             #4d7c0f;
+  --color-surface-tint:                #84cc16;
 
-  /* Secondary */
-  --color-secondary:                   #c3caa4;
-  --color-on-secondary:                #2d3318;
-  --color-secondary-container:         #3a3f28;
-  --color-on-secondary-container:      #dfe6bf;
-  --color-secondary-fixed-dim:         #7a8260;
+  /* Secondary (muted lime / sage) */
+  --color-secondary:                   #a3e635;
+  --color-on-secondary:                #142500;
+  --color-secondary-container:         #233a06;
+  --color-on-secondary-container:      #bef264;
+  --color-secondary-fixed-dim:         #4d7c0f;
 
   /* Tertiary (purple accent) */
   --color-tertiary:                    #e9b6eb;
@@ -59,13 +63,13 @@
   --color-on-tertiary-container:       #ffd6ff;
 
   /* Error / red */
-  --color-error:                       #ffb4ab;
-  --color-on-error:                    #690005;
-  --color-error-container:             #93000a;
-  --color-on-error-container:          #ffdad6;
+  --color-error:                       #ff6b6b;
+  --color-on-error:                    #450a0a;
+  --color-error-container:             #3b0d0d;
+  --color-on-error-container:          #fca5a5;
 
   /* On-background */
-  --color-on-background:               #e8e6de;
+  --color-on-background:               #E8E3D9;
 
   /* Spacing */
   --spacing-padding-card: 24px;
@@ -79,8 +83,8 @@
   --spacing-space-lg: 24px;
 
   /* Shadows */
-  --shadow-card:     0px 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-dropdown: 0px 8px 32px rgba(0, 0, 0, 0.7);
+  --shadow-card:     0px 1px 3px rgba(0, 0, 0, 0.4), 0px 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-dropdown: 0px 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 .material-symbols-outlined {
@@ -93,25 +97,25 @@
 /* CSS Gauge */
 .gauge-container {
   position: relative;
-  width: 120px;
-  height: 60px;
+  width: 130px;
+  height: 65px;
   overflow: hidden;
 }
 .gauge-arc {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 12px solid var(--color-surface-container-high);
+  border: 11px solid var(--color-surface-container-high);
   position: absolute;
   top: 0;
   left: 0;
   box-sizing: border-box;
 }
 .gauge-fill {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 12px solid var(--color-primary);
+  border: 11px solid var(--color-primary);
   position: absolute;
   top: 0;
   left: 0;
@@ -123,64 +127,175 @@
 
 /* Nav Link Glow */
 .nav-active-glow {
-  box-shadow: inset 0 0 0 1px rgba(189, 206, 132, 0.15),
-              0 0 12px rgba(189, 206, 132, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(132, 204, 22, 0.3),
+              0 0 16px rgba(132, 204, 22, 0.12);
 }
 
 /* Stat Card Hover */
 .stat-card > div {
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .stat-card > div:hover {
-  border-color: rgba(189, 206, 132, 0.3);
-  box-shadow: 0px 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(189, 206, 132, 0.1);
+  border-color: rgba(132, 204, 22, 0.35);
 }
 
 /* Alert Items */
 .alert-item {
-  background-color: #1e1e1e !important;
+  background-color: #0d0d0d !important;
 }
 
-/* Leaflet Map Warm Filter */
+/* Leaflet Map Filter */
 .leaflet-tile-pane {
-  filter: sepia(8%) saturate(90%) brightness(102%) hue-rotate(5deg);
+  filter: brightness(95%) contrast(105%) saturate(90%);
 }
 
 /* Leaflet Tooltip */
 .leaflet-tooltip {
-  background-color: #161616 !important;
-  color: #e8e6de !important;
-  border: 1px solid #2e2e2e !important;
+  background-color: #080808 !important;
+  color: #E8E3D9 !important;
+  border: 1px solid #282828 !important;
   border-radius: 8px !important;
-  font-family: 'Hanken Grotesk', sans-serif !important;
-  font-size: 12px !important;
+  font-family: 'JetBrains Mono', 'DM Sans', ui-monospace, sans-serif !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
   padding: 4px 10px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
+  letter-spacing: 0.02em;
 }
 
 .leaflet-tooltip-top::before {
-  border-top-color: #2e2e2e !important;
+  border-top-color: #282828 !important;
 }
 .leaflet-tooltip-bottom::before {
-  border-bottom-color: #2e2e2e !important;
+  border-bottom-color: #282828 !important;
 }
 .leaflet-tooltip-left::before {
-  border-left-color: #2e2e2e !important;
+  border-left-color: #282828 !important;
 }
 .leaflet-tooltip-right::before {
-  border-right-color: #2e2e2e !important;
+  border-right-color: #282828 !important;
 }
 
 /* Leaflet Attribution */
 .leaflet-control-attribution {
-  background-color: rgba(245, 240, 232, 0.85) !important;
-  color: #6b6b5a !important;
+  background-color: rgba(8, 8, 8, 0.85) !important;
+  color: #a8a29e !important;
   font-size: 10px !important;
   border-radius: 4px 0 0 0 !important;
   backdrop-filter: blur(4px);
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
 }
 
 .leaflet-control-attribution a {
-  color: #3a5a1a !important;
+  color: #84cc16 !important;
 }
+
+/* ── Light Mode Override Tokens ── */
+[data-theme="light"],
+.theme-light {
+  --color-background:                  #f1f5f9;
+  --color-surface:                     #ffffff;
+  --color-surface-dim:                 #e2e8f0;
+  --color-surface-bright:              #ffffff;
+
+  --color-surface-container-lowest:    #ffffff;
+  --color-surface-container-low:       #f8fafc;
+  --color-surface-container:           #f1f5f9;
+  --color-surface-container-high:      #e2e8f0;
+  --color-surface-container-highest:   #cbd5e1;
+
+  --color-on-surface:                  #0f172a;
+  --color-on-surface-variant:          #64748b;
+  --color-inverse-surface:             #0f172a;
+  --color-inverse-on-surface:          #ffffff;
+
+  --color-outline:                     #cbd5e1;
+  --color-outline-variant:             #e2e8f0;
+
+  --color-primary:                     #65a30d;
+  --color-on-primary:                  #ffffff;
+  --color-primary-container:           #ecfccb;
+  --color-on-primary-container:        #365314;
+  --color-inverse-primary:             #84cc16;
+  --color-surface-tint:                #65a30d;
+
+  --color-secondary:                   #4d7c0f;
+  --color-on-secondary:                #ffffff;
+  --color-secondary-container:         #dcfce7;
+  --color-on-secondary-container:      #14532d;
+  --color-secondary-fixed-dim:         #84cc16;
+
+  --color-tertiary:                    #9333ea;
+  --color-on-tertiary:                 #ffffff;
+  --color-tertiary-container:          #f3e8ff;
+  --color-on-tertiary-container:       #581c87;
+
+  --color-error:                       #dc2626;
+  --color-on-error:                    #ffffff;
+  --color-error-container:             #fee2e2;
+  --color-on-error-container:          #991b1b;
+
+  --color-on-background:               #0f172a;
+
+  --shadow-card:     0px 1px 3px rgba(0, 0, 0, 0.05), 0px 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-dropdown: 0px 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Light mode specific element adaptations */
+.theme-light .sidebar-logo,
+[data-theme="light"] .sidebar-logo {
+  filter: invert(1) brightness(0.1);
+}
+
+.theme-light .leaflet-tile-pane,
+[data-theme="light"] .leaflet-tile-pane {
+  filter: brightness(100%) contrast(100%) saturate(100%);
+}
+
+.theme-light .leaflet-tooltip,
+[data-theme="light"] .leaflet-tooltip {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-light .leaflet-tooltip-top::before,
+[data-theme="light"] .leaflet-tooltip-top::before {
+  border-top-color: #e2e8f0 !important;
+}
+
+.theme-light .leaflet-control-attribution,
+[data-theme="light"] .leaflet-control-attribution {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #64748b !important;
+}
+
+.theme-light .alert-item,
+[data-theme="light"] .alert-item {
+  background-color: #ffffff !important;
+}
+
+/* Dashboard typography color overrides */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+.theme-light h1,
+.theme-light h2,
+.theme-light h3,
+.theme-light h4 {
+  color: var(--color-on-surface) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4 {
+  color: var(--color-on-surface) !important;
+}
+
