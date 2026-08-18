@@ -73,7 +73,9 @@ export default function DeviceMapPage() {
 
             <div className="flex items-center justify-between pt-2 border-t border-surface-container-high/40">
               <div className="font-sans text-[12px] font-bold">
-                Duty: <span className={device.dutyCycle > 80 ? 'text-error' : 'text-primary'}>{device.dutyCycle}%</span>
+                Duty: <span className={device.dutyCycle > 80 ? 'text-error' : (device.dutyCycle === null ? 'text-on-surface-variant' : 'text-primary')}>
+                  {device.dutyCycle !== null && device.dutyCycle !== undefined ? `${device.dutyCycle}%` : '--'}
+                </span>
               </div>
               <Link 
                 to="/dashboard/readings"

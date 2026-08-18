@@ -10,7 +10,8 @@ useGLTF.preload('/assets/models/antenna.glb');
 
 const Model = ({ url }) => {
   const { scene } = useGLTF(url);
-  return <primitive object={scene} />;
+  const clonedScene = React.useMemo(() => scene.clone(), [scene]);
+  return <primitive key={url} object={clonedScene} />;
 };
 
 const LoadingFallback = () => (
@@ -110,8 +111,8 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
         <div ref={canvasWrapperRef} className="flex-1 w-full h-full relative cursor-grab active:cursor-grabbing">
           <Suspense fallback={<LoadingFallback />}>
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <Stage environment="city" intensity={0.6}>
-                <Model url={modelPath} />
+              <Stage key={modelPath} environment="city" intensity={0.6}>
+                <Model key={modelPath} url={modelPath} />
               </Stage>
               <OrbitControls enableZoom={true} enablePan={true} makeDefault />
             </Canvas>

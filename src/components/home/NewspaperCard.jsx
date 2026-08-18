@@ -143,7 +143,8 @@ const NewspaperCard = forwardRef(function NewspaperCard(
               src={article.image}
               alt=""
               className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 brightness-[0.88] select-none pointer-events-none"
-              loading="eager"
+              loading="lazy"
+              decoding="async"
               draggable="false"
             />
 
@@ -154,7 +155,8 @@ const NewspaperCard = forwardRef(function NewspaperCard(
               className={`absolute inset-0 w-full h-full object-cover contrast-[1.08] brightness-[0.98] select-none pointer-events-none transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                 isCenter ? 'opacity-100' : 'opacity-0'
               }`}
-              loading="eager"
+              loading="lazy"
+              decoding="async"
               draggable="false"
             />
           </div>

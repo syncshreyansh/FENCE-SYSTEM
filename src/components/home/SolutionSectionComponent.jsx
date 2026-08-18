@@ -175,7 +175,9 @@ export default function SolutionSectionComponent() {
         <img 
           className="w-full rounded-2xl shadow-[0_0_50px_rgba(132,204,22,0.12)] block border border-white/10" 
           src="/assets/images/farm-solution-diagram.png" 
-          alt="Smart fence system" 
+          alt="Smart fence system"
+          loading="lazy"
+          decoding="async"
         />
         
         {/* Left Card */}
