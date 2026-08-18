@@ -34,7 +34,7 @@ export default function DeviceMap({ devices }) {
       {/* Header & Legend */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6 shrink-0 z-10">
         <h3 className="text-[15px] sm:text-[16px] font-bold text-on-surface leading-tight tracking-tight">Device Map</h3>
-        <div className="flex items-center gap-4 shrink-0 self-end sm:self-auto font-mono text-[11px]">
+        <div className="flex items-center gap-4 shrink-0 self-end sm:self-auto font-mono text-[11px] flex-wrap">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#84cc16] shrink-0"></span>
             <span className="text-on-surface-variant font-medium">Normal</span>

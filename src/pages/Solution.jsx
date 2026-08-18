@@ -8,7 +8,7 @@ export default function Solution() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-[#000000] pt-16">
+    <main className="min-h-screen bg-[#000000] pt-16 overflow-x-hidden">
       <SolutionSection />
     </main>
   )

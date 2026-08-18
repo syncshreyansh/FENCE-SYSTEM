@@ -110,7 +110,7 @@ export default function HomeSection() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen h-full flex flex-col justify-between pt-16 sm:pt-18 lg:pt-20 3xl:pt-28 4xl:pt-36 pb-3 sm:pb-5 3xl:pb-8 4xl:pb-12 px-3 sm:px-6 lg:px-12 3xl:px-16 4xl:px-24 overflow-hidden bg-[#000000]"
+      className="relative min-h-screen h-full flex flex-col justify-between pt-20 sm:pt-24 lg:pt-28 3xl:pt-32 4xl:pt-40 pb-3 sm:pb-5 3xl:pb-8 4xl:pb-12 px-3 sm:px-6 lg:px-12 3xl:px-16 4xl:px-24 overflow-hidden bg-[#000000]"
     >
       {/* Forest Background atmosphere matching REF.png */}
       <ForestBackground />
@@ -118,9 +118,9 @@ export default function HomeSection() {
       <div className="relative z-10 w-full max-w-[1920px] 4xl:max-w-[2560px] 5xl:max-w-none mx-auto flex flex-col justify-between flex-grow">
         {/* Header Section: Massive Editorial Heading + Metadata */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-start w-full mb-1 sm:mb-2 3xl:mb-4 gap-2 sm:gap-4">
-          <div ref={headingRef} className="relative z-10">
+          <div ref={headingRef} className="relative z-10 pl-6 sm:pl-0">
             <h1
-              className="text-[#E8E3D9] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] 2xl:text-[96px] 3xl:text-[116px] 4xl:text-[144px] 5xl:text-[164px] leading-[0.9] m-0 p-0 tracking-tight uppercase font-black"
+              className="text-[#E8E3D9] text-5xl leading-[0.88] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] 2xl:text-[96px] 3xl:text-[116px] 4xl:text-[144px] 5xl:text-[164px] sm:leading-[0.9] m-0 p-0 tracking-tight uppercase font-black"
               style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900 }}
             >
               IN THE
@@ -129,8 +129,8 @@ export default function HomeSection() {
             </h1>
           </div>
 
-          {/* Editorial Metadata matching REF.png */}
-          <div ref={metaRef} className="flex items-start gap-2.5 sm:gap-3 3xl:gap-4 mt-2 md:mt-2 3xl:mt-3 self-start md:self-auto">
+          {/* Editorial Metadata — desktop/tablet only */}
+          <div ref={metaRef} className="hidden md:flex items-start gap-2.5 sm:gap-3 3xl:gap-4 mt-2 md:mt-2 3xl:mt-3 self-start md:self-auto">
             <div className="h-px bg-[#84cc16] w-6 sm:w-10 3xl:w-16 4xl:w-20 mt-2 3xl:mt-3 shrink-0" />
             <div
               className="flex flex-col text-left tracking-widest text-[10px] sm:text-xs 3xl:text-sm 4xl:text-base leading-snug"

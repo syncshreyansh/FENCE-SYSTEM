@@ -252,7 +252,7 @@ export default function FullScreenNav() {
               type="button"
               onClick={handleClose}
               aria-label="Close menu"
-              className="group relative w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
+              className="group relative w-11 h-11 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer transition-transform duration-500 ease-out hover:rotate-180"
             >
               <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#84cc16] rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
               <div className="absolute w-6 lg:w-9 h-0.5 lg:h-1 bg-[#84cc16] -rotate-45 transition-transform duration-300 group-hover:scale-x-110" />
@@ -303,7 +303,7 @@ export default function FullScreenNav() {
 
           {/* Bottom metadata / footer (K72 style with DM Sans) */}
           <div
-            className="navmeta flex justify-between items-center px-6 py-4 text-xs font-semibold tracking-widest text-white/40 uppercase"
+            className="navmeta flex justify-between items-center px-4 lg:px-6 py-4 text-[10px] sm:text-xs font-semibold tracking-widest text-white/40 uppercase gap-3 min-w-0"
             style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
           >
             <span>DFENCE CONTROLLER</span>

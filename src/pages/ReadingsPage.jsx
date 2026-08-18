@@ -41,7 +41,7 @@ export default function ReadingsPage() {
   const isOffline = !selectedDevice.online;
 
   return (
-    <div className="flex flex-col h-full gap-6 select-none">
+    <div className="flex flex-col h-full gap-6 select-none min-w-0">
       
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 shrink-0">
@@ -69,10 +69,10 @@ export default function ReadingsPage() {
       </div>
 
       {/* Main Content: Two Columns */}
-      <div className="flex gap-6 h-[calc(100vh-160px)]">
+      <div className="flex flex-col lg:flex-row gap-6 min-h-0 lg:h-[calc(100vh-160px)] min-w-0">
         
         {/* Left Column: Device Selector */}
-        <div className="w-72 bg-surface-container-lowest border border-surface-container-high rounded-2xl flex flex-col overflow-hidden shrink-0 shadow-card">
+        <div className="w-full lg:w-72 max-h-[280px] lg:max-h-none bg-surface-container-lowest border border-surface-container-high rounded-2xl flex flex-col overflow-hidden shrink-0 shadow-card">
           <div className="p-4 border-b border-surface-container-high bg-surface-container-lowest z-10 shrink-0 flex items-center justify-between">
             <h3 className="font-bold text-on-surface text-[14px] tracking-tight">Devices</h3>
             <span className="font-mono text-[11px] text-on-surface-variant opacity-75">{mockReadings.length} total</span>
@@ -112,7 +112,7 @@ export default function ReadingsPage() {
         </div>
 
         {/* Right Column: Detail Panel */}
-        <div className="flex-1 overflow-y-auto pr-2 pb-8 flex flex-col gap-5">
+        <div className="flex-1 overflow-y-auto lg:pr-2 pb-8 flex flex-col gap-5 min-w-0">
           
           {isOffline ? (
             /* Offline State */
@@ -122,7 +122,7 @@ export default function ReadingsPage() {
               <p className="text-[14px] text-on-surface-variant mb-1">Last seen {selectedDevice.lastSeen}.</p>
               <p className="text-[14px] text-on-surface-variant mb-8">No current readings available.</p>
               
-              <div className="flex items-center gap-6 text-[13px] text-on-surface-variant mb-8 bg-surface-container px-6 py-4 rounded-lg">
+              <div className="flex flex-wrap items-center justify-center gap-6 text-[13px] text-on-surface-variant mb-8 bg-surface-container px-6 py-4 rounded-lg">
                 <div className="flex items-center gap-2">
                   <span>Battery:</span>
                   <span className="font-bold text-error">{selectedDevice.battery}% 🔴</span>
@@ -135,7 +135,7 @@ export default function ReadingsPage() {
                 GPS: {selectedDevice.gps.lat}°N {selectedDevice.gps.lng}°E — {selectedDevice.gps.sector}
               </div>
               
-              <div className="flex gap-4">
+              <div className="flex flex-wrap justify-center gap-4">
                 <Link to="/dashboard/device-map" className="bg-surface-container-high text-on-surface px-6 py-2 rounded-lg text-[14px] font-semibold hover:bg-surface-container transition-colors">View on Map</Link>
                 <button className="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg text-[14px] font-semibold hover:opacity-90 transition-opacity">Mark for Inspection</button>
               </div>
@@ -158,7 +158,7 @@ export default function ReadingsPage() {
                         <>
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-[20px]">🔴</span>
-                            <span className="text-[32px] font-sans font-black tracking-tight text-error leading-none uppercase">Illegal Tap</span>
+                            <span className="text-[24px] lg:text-[32px] font-sans font-black tracking-tight text-error leading-none uppercase">Illegal Tap</span>
                           </div>
                           <p className="text-[13px] text-on-surface max-w-[320px]">"Unauthorized continuous current draw detected on fence line"</p>
                         </>
@@ -166,7 +166,7 @@ export default function ReadingsPage() {
                         <>
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-[20px]">🟢</span>
-                            <span className="text-[32px] font-sans font-black tracking-tight text-primary leading-none uppercase">{selectedDevice.classification}</span>
+                            <span className="text-[24px] lg:text-[32px] font-sans font-black tracking-tight text-primary leading-none uppercase break-words">{selectedDevice.classification}</span>
                           </div>
                           <p className="text-[13px] text-on-surface max-w-[320px]">
                             {selectedDevice.classification === 'Normal' ? '"Normal baseline reading."' : '"Appliance load pattern. No illegal tap signatures detected."'}
@@ -372,12 +372,12 @@ export default function ReadingsPage() {
 
               {/* TIER 5 */}
               <div className="reading-card bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-card overflow-hidden">
-                <div className="p-4 border-b border-surface-container-high flex justify-between items-center bg-surface-container-lowest">
-                  <h3 className="text-[14px] font-bold text-on-surface tracking-tight">Recent Readings — <span className="font-mono text-primary">{selectedDevice.id}</span></h3>
-                  <span className="text-[11px] font-mono text-on-surface-variant">Last {selectedDevice.history.length} records</span>
+                <div className="p-4 border-b border-surface-container-high flex justify-between items-center bg-surface-container-lowest gap-2 flex-wrap">
+                  <h3 className="text-[14px] font-bold text-on-surface tracking-tight min-w-0">Recent Readings — <span className="font-mono text-primary">{selectedDevice.id}</span></h3>
+                  <span className="text-[11px] font-mono text-on-surface-variant shrink-0">Last {selectedDevice.history.length} records</span>
                 </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto min-w-0">
+                  <table className="w-full min-w-[720px] text-left border-collapse">
                     <thead>
                       <tr className="bg-surface-container-low text-on-surface-variant font-mono text-[10px] uppercase tracking-widest border-b border-surface-container-high">
                         <th className="px-4 py-3 font-bold">Timestamp</th>

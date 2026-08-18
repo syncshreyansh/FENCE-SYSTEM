@@ -37,8 +37,8 @@ export default function TeamPage() {
             className="bg-surface-container-lowest border border-surface-container-high rounded-2xl p-5 shadow-card flex flex-col justify-between hover:border-primary/40 transition-colors"
           >
             <div>
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
+            <div className="flex items-start justify-between mb-4 gap-2">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-11 h-11 rounded-xl bg-primary text-black font-sans font-black text-[16px] flex items-center justify-center shrink-0">
                     {member.initials}
                   </div>
@@ -48,7 +48,7 @@ export default function TeamPage() {
                   </div>
                 </div>
 
-                <span className={`px-2.5 py-0.5 rounded text-[10px] font-sans font-bold uppercase tracking-tight ${
+                <span className={`px-2.5 py-0.5 rounded text-[10px] font-sans font-bold uppercase tracking-tight shrink-0 ${
                   member.status === 'On Patrol'
                     ? 'bg-[#142500] text-primary border border-primary/30'
                     : member.status === 'Online'

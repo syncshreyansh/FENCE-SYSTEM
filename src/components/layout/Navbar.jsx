@@ -61,7 +61,7 @@ export default function Navbar() {
           setNavOpen(true)
         }}
         aria-label="Open menu"
-        className="pointer-events-auto group relative h-10 lg:h-14 3xl:h-18 4xl:h-22 w-24 lg:w-40 3xl:w-52 4xl:w-64 bg-transparent border border-white/10 overflow-hidden cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#84cc16]"
+        className="pointer-events-auto group relative h-11 lg:h-14 3xl:h-18 4xl:h-22 w-24 lg:w-40 3xl:w-52 4xl:w-64 bg-transparent border border-white/10 overflow-hidden cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#84cc16]"
       >
         <span ref={fillRef} className="pointer-events-none" />
         <div className="relative z-10 h-full px-5 lg:px-8 3xl:px-10 4xl:px-12 flex flex-col justify-center items-end gap-1 lg:gap-1.5 3xl:gap-2 4xl:gap-2.5 pointer-events-none">

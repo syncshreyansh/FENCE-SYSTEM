@@ -87,11 +87,11 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
     >
       <div
         ref={containerRef}
-        className="relative w-full h-full max-w-6xl max-h-[90vh] mx-4 flex flex-col bg-zinc-900/50 border border-white/10 rounded-2xl overflow-hidden"
+        className="relative w-full h-full max-w-6xl max-h-[90vh] mx-3 sm:mx-4 flex flex-col bg-zinc-900/50 border border-white/10 rounded-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 absolute top-0 w-full z-10 pointer-events-none">
+        <div className="flex items-center justify-between p-4 lg:p-6 absolute top-0 w-full z-10 pointer-events-none">
           <h3 className="text-white text-sm uppercase tracking-[0.2em] font-medium bg-black/50 px-4 py-2 rounded-full backdrop-blur-md">
             {title}
           </h3>
@@ -121,7 +121,7 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
 
         {/* Optional Secondary Action (e.g., View PCB button) */}
         {secondaryAction && (
-          <div className="absolute bottom-8 right-8 z-10 pointer-events-none">
+          <div className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 z-10 pointer-events-none">
             <div className="pointer-events-auto">
               {secondaryAction}
             </div>

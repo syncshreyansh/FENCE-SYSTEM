@@ -17,7 +17,7 @@ export default function AlertFeed({ alerts }) {
           <div 
             key={alert.id} 
             data-type={alert.type}
-            className={`alert-item bg-surface border-l-4 ${getBorderColor(alert.type)} rounded-lg p-3.5 overflow-hidden border-y border-r border-surface-container-high min-w-[280px] shrink-0`}
+            className={`alert-item bg-surface border-l-4 ${getBorderColor(alert.type)} rounded-lg p-3.5 overflow-hidden border-y border-r border-surface-container-high min-w-[240px] sm:min-w-[280px] shrink-0`}
           >
             <div className="font-bold text-on-surface text-[13px] sm:text-[14px] leading-tight mb-1 truncate">
               Meter <span className="font-mono text-primary">{alert.meterId}</span> &middot; <span className="capitalize">{alert.type}</span>

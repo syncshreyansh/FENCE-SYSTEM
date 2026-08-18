@@ -88,7 +88,7 @@ export default function HelpCenterPage() {
               onClick={() => setOpenFaq(openFaq === i ? null : i)}
             >
               <div className="flex justify-between items-center gap-4">
-                <span className="font-sans font-bold text-on-surface text-[14px]">{faq.q}</span>
+                <span className="font-sans font-bold text-on-surface text-[14px] min-w-0">{faq.q}</span>
                 <ChevronDown className={`w-4 h-4 text-on-surface-variant transition-transform shrink-0 ${openFaq === i ? 'rotate-180' : ''}`} />
               </div>
               {openFaq === i && (

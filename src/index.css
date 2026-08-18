@@ -11,6 +11,7 @@
 html {
   scroll-behavior: smooth;
   background-color: #000000;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -105,6 +106,7 @@ html {
 body {
   margin: 0;
   background-color: #000000;
+  overflow-x: hidden;
 }
 
 @keyframes slowFadeIn {

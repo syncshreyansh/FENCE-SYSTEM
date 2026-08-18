@@ -32,13 +32,13 @@ export default function ReportsSummaryPage() {
             Executive Summary · Automated Monthly Telemetry Audit
           </p>
         </div>
-        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
-          <div className="flex bg-surface-container-lowest border border-surface-container-high rounded-xl p-1">
+        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap min-w-0">
+          <div className="flex bg-surface-container-lowest border border-surface-container-high rounded-xl p-1 overflow-x-auto max-w-full">
             {['Week', 'Month', 'Quarter', 'Year'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setTimeRange(tab)}
-                className={`px-3 py-1.5 rounded-lg text-[12px] font-mono font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-[12px] font-mono font-bold transition-all shrink-0 ${
                   timeRange === tab ? 'bg-primary text-black' : 'text-on-surface-variant hover:text-on-surface'
                 }`}
               >
@@ -105,7 +105,7 @@ export default function ReportsSummaryPage() {
         {zonePerformance.map((zone, idx) => (
           <div key={idx} className="bg-surface-container-lowest border border-surface-container-high rounded-2xl p-6 shadow-card flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 gap-2 flex-wrap">
                 <div className="flex items-center gap-3">
                   <span className="w-3 h-3 rounded-full bg-primary shrink-0"></span>
                   <h3 className="text-[18px] font-sans font-black tracking-tight text-on-surface">{zone.zone}</h3>

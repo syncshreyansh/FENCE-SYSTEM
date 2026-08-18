@@ -28,7 +28,7 @@ export default function DeviceMapPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-4 font-mono text-[12px] bg-surface-container-lowest border border-surface-container-high px-4 py-2 rounded-xl">
+        <div className="flex items-center gap-4 font-mono text-[12px] bg-surface-container-lowest border border-surface-container-high px-4 py-2 rounded-xl flex-wrap">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(132,204,22,0.7)]"></span>
             <span className="text-on-surface"><strong className="font-sans font-bold">{onlineCount}</strong> Online</span>
@@ -45,7 +45,7 @@ export default function DeviceMapPage() {
       <ZoneFilter activeZone={activeZone} onZoneChange={setActiveZone} />
 
       {/* Full Map Container */}
-      <div className="h-[600px] w-full min-w-0">
+      <div className="h-[420px] lg:h-[600px] w-full min-w-0 overflow-hidden">
         <DeviceMap devices={filtered} />
       </div>
 

@@ -64,14 +64,14 @@ export default function SettingsPage() {
               <span className="text-[11px] font-mono text-on-surface-variant mt-1 block">Default standard legal limit is &lt;5.0%</span>
             </div>
 
-            <div className="pt-3 border-t border-surface-container-high/40 flex items-center justify-between">
-              <div>
+            <div className="pt-3 border-t border-surface-container-high/40 flex items-center justify-between gap-4">
+              <div className="min-w-0">
                 <div className="font-sans font-bold text-on-surface text-[14px]">Auto-Dispatch Ranger Units</div>
                 <div className="text-[11px] font-mono text-on-surface-variant">Trigger geo-located dispatch alert on critical taps</div>
               </div>
               <button
                 onClick={() => setAutoDispatch(prev => !prev)}
-                className={`w-11 h-6 rounded-full p-1 transition-colors cursor-pointer ${
+                className={`w-11 h-6 rounded-full p-1 transition-colors cursor-pointer shrink-0 ${
                   autoDispatch ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               >
@@ -111,14 +111,14 @@ export default function SettingsPage() {
               <span className="text-[11px] font-mono text-on-surface-variant mt-1 block">Lower interval increases battery consumption</span>
             </div>
 
-            <div className="pt-3 border-t border-surface-container-high/40 flex items-center justify-between">
-              <div>
+            <div className="pt-3 border-t border-surface-container-high/40 flex items-center justify-between gap-4">
+              <div className="min-w-0">
                 <div className="font-sans font-bold text-on-surface text-[14px]">SMS & Cellular Failover</div>
                 <div className="text-[11px] font-mono text-on-surface-variant">Send satellite/GSM SMS when LoRa gateway drops</div>
               </div>
               <button
                 onClick={() => setSmsAlerts(prev => !prev)}
-                className={`w-11 h-6 rounded-full p-1 transition-colors cursor-pointer ${
+                className={`w-11 h-6 rounded-full p-1 transition-colors cursor-pointer shrink-0 ${
                   smsAlerts ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               >

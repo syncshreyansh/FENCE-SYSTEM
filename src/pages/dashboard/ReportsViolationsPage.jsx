@@ -101,7 +101,7 @@ export default function ReportsViolationsPage() {
       </div>
 
       {/* Filters & Search Toolbar */}
-      <div className="bg-surface-container-lowest border border-surface-container-high rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3.5">
+      <div className="bg-surface-container-lowest border border-surface-container-high rounded-2xl p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 min-w-0">
         <div className="relative flex items-center w-full sm:w-80 h-[38px] rounded-xl bg-surface border border-surface-container-high px-3 gap-2 focus-within:border-primary">
           <Search className="w-4 h-4 text-on-surface-variant shrink-0" />
           <input
@@ -153,8 +153,8 @@ export default function ReportsViolationsPage() {
           <span className="text-[11px] font-mono text-on-surface-variant">Auto-synced with IoT Ledger</span>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto min-w-0">
+          <table className="w-full min-w-[960px] text-left border-collapse">
             <thead>
               <tr className="bg-surface-container-low text-on-surface-variant font-mono text-[10px] uppercase tracking-widest border-b border-surface-container-high">
                 <th className="px-4 py-3 font-bold">Incident ID</th>
