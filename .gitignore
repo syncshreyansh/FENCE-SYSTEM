@@ -13,6 +13,19 @@ dist-ssr
 *.local
 .vercel
 
+# Environment variables & secrets
+.env
+.env.*
+*.env
+
+# Testing & Lint cache
+coverage/
+.eslintcache
+
+# AI & agent folders
+.agy
+.gemini
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

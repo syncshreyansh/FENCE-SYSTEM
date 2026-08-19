@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, Suspense } from 'react';
+import { createPortal } from 'react-dom';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, OrbitControls, Stage } from '@react-three/drei';
+import { useGLTF, OrbitControls, Stage, Html } from '@react-three/drei';
 import gsap from 'gsap';
 
 // Preload the models so they appear faster
@@ -15,11 +16,9 @@ const Model = ({ url }) => {
 };
 
 const LoadingFallback = () => (
-  <div className="absolute inset-0 flex items-center justify-center text-white">
-    <div className="flex flex-col items-center gap-3">
-      <div className="w-8 h-8 border-4 border-white/20 border-t-cyan-400 rounded-full animate-spin"></div>
-      <span className="text-sm tracking-widest uppercase text-white/70">Loading Model...</span>
-    </div>
+  <div className="flex flex-col items-center gap-3 text-white select-none pointer-events-none">
+    <div className="w-8 h-8 border-4 border-white/20 border-t-cyan-400 rounded-full animate-spin"></div>
+    <span className="text-sm tracking-widest uppercase text-white/70 whitespace-nowrap">Loading Model...</span>
   </div>
 );
 
@@ -79,7 +78,7 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       ref={overlayRef}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
@@ -109,14 +108,14 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
 
         {/* 3D Canvas */}
         <div ref={canvasWrapperRef} className="flex-1 w-full h-full relative cursor-grab active:cursor-grabbing">
-          <Suspense fallback={<LoadingFallback />}>
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+            <Suspense fallback={<Html center><LoadingFallback /></Html>}>
               <Stage key={modelPath} environment="city" intensity={0.6}>
                 <Model key={modelPath} url={modelPath} />
               </Stage>
-              <OrbitControls enableZoom={true} enablePan={true} makeDefault />
-            </Canvas>
-          </Suspense>
+            </Suspense>
+            <OrbitControls enableZoom={true} enablePan={true} makeDefault />
+          </Canvas>
         </div>
 
         {/* Optional Secondary Action (e.g., View PCB button) */}
@@ -128,7 +127,8 @@ const ModelViewerModal = ({ isOpen, onClose, modelPath, title, secondaryAction }
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
