@@ -5,6 +5,29 @@ import Sidebar from './Sidebar';
 import TopAppBar from './TopAppBar';
 import { ThemeProvider, useTheme } from '../../context/ThemeContext';
 
+function DashboardLoader({ onComplete }) {
+  const loaderRef = useRef(null);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      gsap.to(loaderRef.current, {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.inOut',
+        onComplete: onComplete
+      });
+    }, 1100);
+    
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <div ref={loaderRef} className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center">
+      <div className="w-10 h-10 rounded-full border-2 border-white/10 border-t-white animate-spin"></div>
+    </div>
+  );
+}
+
 const LG_MQ = '(min-width: 1024px)';
 const COLLAPSED_KEY = 'dfence-sidebar-collapsed';
 
@@ -28,7 +51,9 @@ function DashboardShellContent() {
   const location = useLocation();
   const mainRef = useRef(null);
   const pageContainerRef = useRef(null);
+  const shellRef = useRef(null);
   const isDesktop = useIsDesktop();
+  const [showLoader, setShowLoader] = useState(true);
 
   const [desktopCollapsed, setDesktopCollapsed] = useState(() => {
     try {
@@ -91,7 +116,7 @@ function DashboardShellContent() {
       mainRef.current.scrollTop = 0;
     }
 
-    if (pageContainerRef.current) {
+    if (pageContainerRef.current && !showLoader) {
       gsap.killTweensOf(pageContainerRef.current);
       gsap.fromTo(
         pageContainerRef.current,
@@ -105,15 +130,29 @@ function DashboardShellContent() {
         }
       );
     }
-  }, [location.pathname]);
+  }, [location.pathname, showLoader]);
+
+  const handleLoaderComplete = useCallback(() => {
+    setShowLoader(false);
+    if (shellRef.current) {
+      gsap.fromTo(
+        shellRef.current,
+        { opacity: 0, scale: 0.98 },
+        { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }
+      );
+    }
+  }, []);
 
   return (
-    <div
-      className={`flex h-screen overflow-hidden bg-background text-on-surface transition-colors duration-200 ${
-        theme === 'light' ? 'theme-light' : 'theme-dark'
-      }`}
-      data-theme={theme}
-    >
+    <>
+      {showLoader && <DashboardLoader onComplete={handleLoaderComplete} />}
+      <div
+        ref={shellRef}
+        className={`flex h-screen overflow-hidden bg-background text-on-surface transition-colors duration-200 ${
+          theme === 'light' ? 'theme-light' : 'theme-dark'
+        } ${showLoader ? 'opacity-0' : 'opacity-100'}`}
+        data-theme={theme}
+      >
       {mobileOpen && !isDesktop && (
         <button
           type="button"
@@ -141,6 +180,7 @@ function DashboardShellContent() {
         </main>
       </div>
     </div>
+    </>
   );
 }
 

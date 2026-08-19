@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ProblemSection from '../components/home/ProblemSection'
+import Footer from '../components/layout/Footer'
 
 export default function Problem() {
   useEffect(() => {
@@ -8,8 +9,9 @@ export default function Problem() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-[#000000] overflow-hidden">
+    <main className="min-h-screen bg-[#000000] overflow-hidden flex flex-col justify-between">
       <ProblemSection />
+      <Footer />
     </main>
   )
 }

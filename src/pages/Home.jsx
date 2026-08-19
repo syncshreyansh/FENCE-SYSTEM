@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react'
 import HomeSection from '../components/home/HomeSection'
 import ProblemSection from '../components/home/ProblemSection'
 import SolutionSection from '../components/home/SolutionSection'
+import Footer from '../components/layout/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -84,7 +85,7 @@ export default function Home() {
       </div>
       <div
         ref={problemWrapperRef}
-        className="w-full relative my-24 sm:my-32 lg:my-40"
+        className="w-full relative my-12 sm:my-16 lg:my-20"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
@@ -95,6 +96,7 @@ export default function Home() {
       <div ref={solutionWrapperRef} className="w-full relative">
         <SolutionSection />
       </div>
+      <Footer />
     </main>
   )
 }

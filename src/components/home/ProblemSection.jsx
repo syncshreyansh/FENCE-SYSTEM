@@ -85,8 +85,8 @@ export default function ProblemSection() {
         {/* ── Left Column: Massive Editorial Heading ── */}
         <div ref={leftColRef} className="w-full lg:w-1/2 flex flex-col items-start select-none">
           <h1
-            className="text-white text-6xl sm:text-7xl md:text-8xl lg:text-[100px] xl:text-[124px] 2xl:text-[144px] 3xl:text-[170px] 4xl:text-[210px] leading-[0.88] m-0 p-0 tracking-tight uppercase font-black"
-            style={{ fontFamily: '"Bebas Neue", sans-serif' }}
+            className="text-[#E8E3D9] text-6xl sm:text-7xl md:text-8xl lg:text-[100px] xl:text-[124px] 2xl:text-[144px] 3xl:text-[170px] 4xl:text-[210px] leading-[0.88] m-0 p-0 tracking-tight uppercase font-black"
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 900 }}
           >
             WHERE
             <br />
@@ -101,7 +101,7 @@ export default function ProblemSection() {
                 iterations={2}
                 padding={[2, 14, 2, 14]}
               >
-                <span className="text-white">BREAKS</span>
+                <span className="text-[#E8E3D9]">BREAKS</span>
               </Highlighter>
             </span>
           </h1>
