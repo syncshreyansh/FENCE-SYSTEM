@@ -18,7 +18,7 @@ const PcbImageViewerModal = ({ isOpen, onClose, initialPcb = 'antenna' }) => {
   const pcbData = {
     antenna: { name: 'Antenna PCB', path: '/assets/pcb-images/antenna-pcb.png' },
     meter: { name: 'Meter Module PCB', path: '/assets/pcb-images/meter-pcb.png' },
-    data: { name: 'Data Sender PCB', path: '/assets/pcb-images/data-to-dashboard-pcb.png' }
+    data: { name: 'Data Receiver PCB', path: '/assets/pcb-images/data-to-dashboard-pcb.png' }
   };
 
   useEffect(() => {
@@ -119,7 +119,7 @@ const PcbImageViewerModal = ({ isOpen, onClose, initialPcb = 'antenna' }) => {
           <div className="flex items-center gap-2 pointer-events-auto bg-black/50 p-2 rounded-xl backdrop-blur-md border border-white/10 flex-wrap justify-center">
              <AnimatedSolutionButton isActive={activePcb === 'antenna'} onClick={() => {setActivePcb('antenna'); handleResetZoom();}}>Antenna PCB</AnimatedSolutionButton>
              <AnimatedSolutionButton isActive={activePcb === 'meter'} onClick={() => {setActivePcb('meter'); handleResetZoom();}}>Meter Module PCB</AnimatedSolutionButton>
-             <AnimatedSolutionButton isActive={activePcb === 'data'} onClick={() => {setActivePcb('data'); handleResetZoom();}}>Data Sender PCB</AnimatedSolutionButton>
+             <AnimatedSolutionButton isActive={activePcb === 'data'} onClick={() => {setActivePcb('data'); handleResetZoom();}}>Data Receiver PCB</AnimatedSolutionButton>
           </div>
           <button
             onClick={handleClose}
